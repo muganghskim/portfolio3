@@ -1,0 +1,67 @@
+#container .newsWrap {
+  background-color: rgba(184, 142, 182, 0.2);
+  padding-bottom: 2%;
+}
+#container .newsWrap .center {
+  width: 95%;
+  margin: 0 2.5%;
+  height: 1100px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.1);
+}
+#container .newsWrap .center .gal_tapmenu {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+#container .newsWrap .center .gal_tapmenu li {
+  margin-top: 50px;
+  width: 80px;
+  line-height: 40px;
+  text-align: center;
+  background-color: rgba(184, 142, 182, 0.2);
+}
+#container .newsWrap .center .gal_tapmenu li a {
+  display: block;
+  width: 100%;
+  color: rgba(89, 30, 85, 0.6117647059);
+}
+#container .newsWrap .center .gal_tapmenu li.on {
+  background-color: rgba(184, 142, 182, 0.3647058824);
+}
+#container .newsWrap .center .gal_tapmenu li.on a {
+  color: rgba(89, 30, 85, 0.7960784314);
+}
+#container .newsWrap .center .brdWrap {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 100px;
+}
+#container .newsWrap .center .brdWrap .brdlist {
+  width: 23%;
+  padding: 1%;
+}
+#container .newsWrap .center .brdWrap .brdlist > .adlist {
+  padding: 10px;
+  display: block;
+  border: 1px solid rgba(184, 142, 182, 0.5019607843);
+  border-radius: 5px;
+  height: 350px;
+}
+#container .newsWrap .center .brdWrap .brdlist > .adlist > div {
+  width: 100%;
+}
+#container .newsWrap .center .brdWrap .brdlist > .adlist > div img {
+  width: 100%;
+}
+#container .newsWrap .center .brdWrap .brdlist > .adlist h3 {
+  padding-top: 15px;
+  padding-bottom: 20px;
+  color: rgba(89, 30, 85, 0.7960784314);
+}
+#container .newsWrap .center .brdWrap .brdlist > .adlist p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(184, 142, 182, 0.7803921569);
+}

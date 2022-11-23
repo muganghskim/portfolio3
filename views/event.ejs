@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 페이지</title>
+    <%- include("common/link.ejs") %>
+</head>
+<body>
+    <%- include("common/header.ejs") %>
+    <%- include("common/hbgmenu.ejs") %>
+    <div id="container">
+        <div class="boxhd">
+            <h2>이벤트</h2>
+            <p class="path">path</p>
+        </div>
+        <div class="newsWrap">
+            <div class="center">
+                <ul class="gal_tapmenu">
+                    <li><a href="/news">공지사항</a></li>
+                    <li><a href="/event">이벤트</a></li>
+                </ul>
+                <div class="brdWrap">
+                    <% for(let i =0; i <brdData.length; i++){ %>
+                            <div class="brdlist">
+                                <a class="adlist" href="/brddetail/<%-brdData[i].num%>">
+                                    <div><img src="/upload/<%-brdData[i].thumbnail%>"></div>
+                                    <h3><%-brdData[i].name%></h3>
+                                    <p><%-brdData[i].conext%></p>
+                                </a>
+                            </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include("common/footer.ejs") %>
+    <script src="/js/lefttap.js"></script>
+    <script src="/js/tapmenu.js"></script>
+</body>
+</html>

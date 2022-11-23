@@ -1,0 +1,69 @@
+#container{
+    .newsWrap{
+        background-color: #b88eb633;
+        padding-bottom: 2%;
+        .center{
+            width: 95%;
+            margin: 0 2.5%;
+            height: 1100px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.1);
+            .gal_tapmenu{
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                li{
+                    margin-top: 50px;
+                    width: 80px;
+                    line-height: 40px;
+                    text-align: center;
+                    background-color: #b88eb633;
+                    a{
+                        display: block;
+                        width: 100%;
+                        color: #591e559c;
+                    }
+                    &.on{
+                        background-color: #b88eb65d;
+                        a{
+                            color: #591e55cb;
+                        }
+                    }
+                }
+            }
+            .brdWrap{
+                display: flex;
+                flex-wrap: wrap;
+                margin-top: 100px;
+                .brdlist{
+                    width: 23%;
+                    padding: 1%;
+                    >.adlist{
+                        padding: 10px;
+                        display: block;
+                        border: 1px solid #b88eb680;
+                        border-radius: 5px;
+                        height: 350px;
+                        >div{
+                            width: 100%;
+                            img{
+                                width: 100%;
+                            }
+                        }
+                        h3{
+                            padding-top: 15px;
+                            padding-bottom: 20px;
+                            color: #591e55cb;
+                        }
+                        p{
+                          font-size: 13px;
+                          line-height: 1.7;
+                          color: #b88eb6c7;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

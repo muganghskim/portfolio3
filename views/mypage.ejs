@@ -1,0 +1,40 @@
+<% if(!userData){ %>
+    <script>
+        alert("비회원은 접근할 수 없는 페이지입니다.")
+        location.href = "/login";
+    </script>
+<% } %>
+<%- include("common/header") %>
+<div class="title_img">
+    <div class="center_title">
+        <h2>회원 정보 수정</h2>
+        <p>메인 / 나의 프로필</p>
+    </div>
+</div>
+<div class="mypage">
+    <div class="center">
+        <h2>회원 정보 수정</h2>
+        <form id="myupt" action="/myupdate" method="post">
+            <!-- 아이디 표시 -->
+            <% if(userData){%>
+            <div class="userid"><%- userData.joinid %></div>
+            <% } %>
+            <% if(userData){%>
+                <input id="username" type="text" name="usernick" placeholder="변경할 닉네임 입력" value="<%- userData.joinnick %>">
+            <% } %>
+            <p class="message"></p>
+            <input id="userpass" type="password" name="userpass" placeholder="변경할 비밀번호 입력">
+            <p class="message"></p>
+            <!-- 원래 있는 비밀번호 입력한 input -->
+            <input type="password" name="originpass" placeholder="원래 비밀번호 입력">
+            <button id="submitBtn" type="submit">회원정보 수정</button>
+            <!-- 취소 버튼 누르면 메인 페이지로 이동 -->
+        </form>
+    </div>
+</div>
+<%- include("common/footer") %>
+<!-- 구역이동 및 햄버거 메뉴 -->
+<script src="/js/section.js"></script>
+<script src="/js/validationupt.js"></script>
+</body>
+</html>

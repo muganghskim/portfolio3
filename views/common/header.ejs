@@ -1,0 +1,20 @@
+<div id="header">
+    <div class="hbgBtn">
+        <span class="top"></span>
+        <span class="mid"></span>
+        <span class="bot"></span>
+    </div>
+    <form class="searchBox">
+        <input type="text" name="searchText" placeholder="검색어를 입력해 주세요">
+        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+    <div class="joinWrap">
+        <% if(!userData){ %>
+            <a href="/login"><i class="fa-solid fa-arrow-right"></i>로그인</a>
+            <a href="/join"><i class="fa-solid fa-user"></i>회원가입</a>
+        <% } else { %>
+            <a class="username" href="/my"><%- userData.joinnick %>님</a>
+            <a class="logout" href="/logout">로그아웃</a>
+        <% } %>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 페이지</title>
+    <link rel="stylesheet" href="/css/loginwrap.css">
+</head>
+<body>
+    <div class="loginWrap">
+        <div class="center">
+            <div class="formWrap">
+                <h3>로그인을 해주세요</h3>
+                <div class="pathWrap">
+                    <a class="on" href="/login">로그인</a>
+                    <a href="/join">회원가입</a>
+                </div>
+                <form action="/addlogin" method="post">
+                    <input id="userid" type="text" name="userid" placeholder="ID">
+                    <input id="userpass" type="password" name="userpass" placeholder="Password">
+                    <button type="submit">로그인</button>
+                </form>
+                <p class="path_regi">회원이 아니신가요? <a href="/join">회원가입은 여기로</a></p>
+                <a class="path_home" href="/">HOME</a>
+            </div>
+            <div class="left_imgWrap">
+                <img src="/img/login.jpg">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

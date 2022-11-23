@@ -1,0 +1,103 @@
+#container {
+  margin-left: 280px;
+  transition: all 0.5s;
+}
+#container.on {
+  margin-left: 0;
+}
+#container .boxhd {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(184, 142, 182, 0.2);
+  line-height: 60px;
+  color: rgba(89, 30, 85, 0.7960784314);
+}
+#container .boxhd h2 {
+  margin-top: 15px;
+  margin-left: 30px;
+}
+#container .boxhd .path {
+  margin-top: 15px;
+  margin-right: 30px;
+}
+#container .boxWrap {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgba(184, 142, 182, 0.2);
+}
+#container .boxWrap > div {
+  margin: 1% 0.5%;
+  border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.1);
+}
+#container .boxWrap .introbox {
+  width: 48%;
+  height: 250px;
+  background-color: rgba(89, 30, 85, 0.7960784314);
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  box-sizing: border-box;
+}
+#container .boxWrap .introbox .left-info {
+  color: #fff;
+  padding: 35px;
+}
+#container .boxWrap .introbox .left-info h3 {
+  font-size: 25px;
+  margin-bottom: 25px;
+}
+#container .boxWrap .introbox .left-info p {
+  margin-bottom: 50px;
+}
+#container .boxWrap .introbox .left-info a {
+  display: block;
+  width: 140px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 4px;
+  border: 1px solid #fff;
+  color: #fff;
+  transition: all 0.5s;
+}
+#container .boxWrap .introbox .left-info a:hover {
+  background-color: #fff;
+  color: rgba(89, 30, 85, 0.7960784314);
+}
+#container .boxWrap .introbox .right-img img {
+  transform: translateY(-20px);
+}
+#container .boxWrap .earningbox {
+  width: 24%;
+  height: 250px;
+}
+#container .boxWrap .chart1box {
+  width: 24%;
+  height: 250px;
+}
+#container .boxWrap .prdbox {
+  width: 30%;
+  height: 460px;
+}
+#container .boxWrap .mybox {
+  width: 37%;
+  height: 460px;
+}
+#container .boxWrap .newsbox {
+  width: 29%;
+  height: 460px;
+}
+#container .boxWrap .chart2box {
+  width: 48%;
+  height: 250px;
+}
+#container .boxWrap .chart3box {
+  width: 24%;
+  height: 250px;
+}
+#container .boxWrap .addbox {
+  width: 24%;
+  height: 250px;
+}

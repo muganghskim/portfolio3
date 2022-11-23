@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인</title>
+    <%- include("common/link.ejs") %>
+</head>
+<body>
+    <%- include("common/header.ejs") %>
+    <%- include("common/hbgmenu.ejs") %>
+        <div id="container">
+            <div class="boxhd">
+                <h2>대시보드</h2>
+                <p class="path">path</p>
+            </div>
+            <div class="boxWrap">
+                <div class="introbox">
+                    <div class="left-info">
+                        <h3>안녕하세요, 홍길동님</h3>
+                        <p>돌아오신것을 환영합니다!</p>
+                        <a href="#">지금 시작 →</a>
+                    </div>
+                    <div class="right-img"><img src="/img/Humaaanss.png"></div>
+                </div>
+                <div class="earningbox">
+                    <div>
+                        <canvas id="myChart2"></canvas>
+                    </div>
+                </div>
+                <div class="chart1box">
+                    <div>
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+                <div class="prdbox"></div>
+                <div class="mybox"></div>
+                <div class="newsbox"></div>
+                <div class="chart2box"></div>
+                <div class="chart3box"></div>
+                <div class="addbox"></div>
+            </div>
+        </div>
+    <%- include("common/footer.ejs") %>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+<script>
+    const ctx2 = document.getElementById('myChart2');
+  
+    new Chart(ctx2, {
+      type: 'line',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+  <script src="/js/lefttap.js"></script>
+</body>
+</html>

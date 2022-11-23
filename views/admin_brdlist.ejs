@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 뉴스등록 페이지</title>
+    <link rel="stylesheet" href="/css/admin_prdlist.css">
+</head>
+<body>
+    <!-- 등록 페이지 a -->
+    <ul class="admin_menu">
+        <li><a href="/admin/adlist">이벤트등록페이지</a></li>
+        <li><a href="/admin/storelist">매장등록페이지</a></li>
+        <li><a href="/admin/brdlist">뉴스등록페이지</a></li>
+    </ul>
+    <!-- 등록된 뉴스목록 전부다 보여주는 구간 -->
+    <div class="brdwrap">
+        <% for(let i=0; i < brdData.length; i++){ %>
+        <div class="list">
+            <h3><%-brdData[i].num%></h3>
+            <p><%-brdData[i].name%></p>
+            <p><%-brdData[i].time%></p>
+            <img src="/upload/<%-brdData[i].thumbnail%>">
+        </div>
+        <% } %>
+    </div>
+    <!-- 뉴스를 등록하는 form태그 구간 -->
+    <form enctype="multipart/form-data" action="/add/brdlist" method="post">
+        <input type="text" name="name" placeholder="제목">
+        <textarea name="context" placeholder="설명"></textarea>
+        <input type="file" name="thumbnail">
+        <button type="submit">뉴스등록</button>
+    </form>
+</body>
+</html>

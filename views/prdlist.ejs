@@ -1,0 +1,47 @@
+<%- include("common/header") %>
+<div class="gridTitle">
+    <h2>회원 갤러리</h2>
+    <p>어메스 커피에 대한 회원 분들의 다양한 의견과 제품 설명을 확인하세요</p>
+</div>
+<div class="gridWrap">
+    <% for(let i=0; i < prdData.length; i++){ %>
+        <div class="grid_list">
+            <div class="list_img">
+                <% if(prdData[i].prdfile) { %>
+                <img src="/upload/<%- prdData[i].prdfile %>">
+                <ul class="img_top">
+                    <li class="featured">추천</li>
+                    <li class="for-sale">판매중</li>
+                </ul>
+                <p class="price">$0.7<span>/1ea</span></p>
+                <% } else {%>
+                    <div class="noimg">썸네일 없음</div>
+                <% } %>
+            </div>
+            <div class="list_info">
+                <h3><a href="/prddetail/<%- prdData[i].prdid %>"><%- prdData[i].prdsubject %></a></h3>
+                <p><i class="fa-solid fa-location-dot"></i>매장 위치 : 경기도 고양시 일산서구 덕이동 </p>
+                <ul class="room_info1">
+                    <li><i class="fa-solid fa-mug-hot"></i>에스프레소</li>
+                    <li><i class="fa-solid fa-mug-saucer"></i>카페라떼</li>
+                    <li><i class="fa-solid fa-beer-mug-empty"></i>카페모카</li>
+                </ul>
+                <ul class="room_info2">
+                    <li><i class="fa-solid fa-cookie-bite"></i></i>쿠키</li>
+                    <li><i class="fa-solid fa-burger"></i>마카롱</li>
+                    <li><i class="fa-solid fa-bread-slice"></i>페스츄리</li>
+                </ul>
+                <div class="list_bot">
+                    <p><i class="fa-solid fa-person"></i><%- prdData[i].prdauther %></p>
+                    <p><i class="fa-solid fa-calendar-days"></i><%- prdData[i].prdtime %></p>
+                </div>
+            </div>
+        </div>
+    <% } %>
+</div>
+<div class="brdinsertBtn"><a href="/brdinsert">게시글 작성</a></div>
+<%- include("common/footer") %>
+<!-- 구역이동 및 햄버거 메뉴 -->
+<script src="/js/section.js"></script>
+</body>
+</html>
