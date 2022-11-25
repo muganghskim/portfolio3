@@ -46,7 +46,10 @@ const upload = multer({ storage: storage })
 
 //메인페이지 get요청
 app.get("/",function(req,res){
-  res.render("index",{userData:req.user}); 
+  //db에 저장되어 있는 상품목록들 find로 찾아 와서 전송
+  db.collection("adlist").find({}).toArray(function(err,result){
+    res.render("index",{adData:result,userData:req.user});
+  });
 });
 
 //관리자 로그인 페이지
@@ -85,21 +88,13 @@ app.get("/admin/storelist",function(req,res){
 });
   
   //뉴스를 db에 넣는 경로
-  app.post("/add/brdlist",upload.single('thumbnail'),function(req,res){
-    //파일 첨부가 있을 때 
-    if(req.file){
-      fileTest = req.file.originalname;
-    }
-    //파일 첨부가 없을 때
-    else{
-      fileTest = null;
-    }
+  app.post("/add/brdlist",function(req,res){
     db.collection("count").findOne({name:"뉴스등록"},function(err,result1){
       db.collection("brdlist").insertOne({
         num:result1.brdCount + 1,
         name:req.body.name,
         conext:req.body.context,
-        thumbnail:fileTest,
+        newsoption:req.body.newsoption,
         time:moment().tz("Asia/Seoul").format("YYYY-MM-DD")
       },function(err,result){
         db.collection("count").updateOne({name:"뉴스등록"},{$inc:{brdCount:1}},function(err,result){
@@ -161,11 +156,39 @@ app.get("/admin/storelist",function(req,res){
   });
 
 
-  //뉴스 (사용자) 화면 경로
+  //공지사항 (사용자) 화면 경로
 app.get("/news",function(req,res){
     db.collection("brdlist").find({}).toArray(function(err,result){
       res.render("news",{brdData:result,userData:req.user});
     });
+});
+
+//공지사항 (사용자) 화면 경로
+app.get("/news/all",function(req,res){
+  db.collection("brdlist").find({}).toArray(function(err,result){
+    res.render("news",{brdData:result,userData:req.user});
+  });
+});
+
+//공지사항 서비스 페이지
+app.get("/news/service",function(req,res){
+  db.collection("brdlist").find({newsoption:"서비스"}).toArray(function(err,result){
+    res.render("news",{brdData:result,userData:req.user});
+  });
+});
+
+//공지사항 작업 페이지
+app.get("/news/work",function(req,res){
+  db.collection("brdlist").find({newsoption:"작업"}).toArray(function(err,result){
+    res.render("news",{brdData:result,userData:req.user});
+  });
+});
+
+//공지사항 업데이트카테고리 페이지
+app.get("/news/upt",function(req,res){
+  db.collection("brdlist").find({newsoption:"업데이트"}).toArray(function(err,result){
+    res.render("news",{brdData:result,userData:req.user});
+  });
 });
 
 app.get("/event",function(req,res){
@@ -176,7 +199,7 @@ app.get("/event",function(req,res){
 
 //회원가입 페이지 get 요청
 app.get("/join",function(req,res){
-    res.render("join"); //회원가입 페이지로 응답
+    res.render("join",{userData:req.user}); //회원가입 페이지로 응답
 });
 
 //회원가입 페이지에서 보내준 데이터를 db에 저장요청
@@ -192,7 +215,9 @@ app.post("/addjoin",function(req,res){
                     joinno:result.joinCount + 1,
                     joinid:req.body.userid,
                     joinpass:req.body.userpass,
-                    joinnick:req.body.username
+                    joinnick:req.body.username,
+                    sido:req.body.city1,
+                    sigugun:req.body.city2,
                 },function(err,result){
                     db.collection("count").updateOne({name:"회원정보"},{$inc:{joinCount:1}},function(err,result){
                         res.send("<script>alert('회원가입이 완료되었습니다.'); location.href='/login'; </script>")
@@ -205,7 +230,7 @@ app.post("/addjoin",function(req,res){
 
 //로그인 경로 get 요청
 app.get("/login",function(req,res){
-    res.render("login");
+    res.render("login",{userData:req.user});
 });
 
 //로그아웃 경로 get 요청
@@ -269,6 +294,14 @@ app.get("/prdlist",function(req,res){
     db.collection("prdlist").find().sort({brdid:-1}).toArray(function(err,result){
         res.render("prdlist",{prdData:result,userData:req.user})
     });
+});
+
+//상품게시판 전체목록 페이지 get 요청
+app.get("/prdlist/all",function(req,res){
+  //db안에 게시글 콜렉션 찾아서 데이터 전부 꺼내오고 ejs파일로 응답
+  db.collection("prdlist").find().sort({brdid:-1}).toArray(function(err,result){
+      res.render("prdlist",{prdData:result,userData:req.user})
+  });
 });
 
 //생활가전 페이지
@@ -347,6 +380,9 @@ app.post("/addprd",upload.single('addfile'),function(req,res){
             prdsubject:req.body.subject,
             prdcontext:req.body.context,
             prdauther:req.user.joinnick,
+            prdlocal1:req.user.sido,
+            prdlocal2:req.user.sigugun,
+            prdprice:req.body.price,
             prdtime:time,
             prdfile:fileUpload,
             prdoption:req.body.prdoption
@@ -377,36 +413,36 @@ app.post("/update",upload.single('uptfile'),function(req,res){
         fileUpload = req.body.originfile;
     }
 
-    db.collection("portfolio1_board").updateOne({brdid:Number(req.body.id)},{
+    db.collection("prdlist").updateOne({brdid:Number(req.body.id)},{
         $set:{
             brdsubject:req.body.subject,
             brdcontext:req.body.context,
             brdfile:fileUpload     
         }
     },function(err,result){
-        res.redirect("/brddetail/" + req.body.id);
+        res.redirect("/prddetail/" + req.body.id);
     });
 });
 
 //게시글삭제 페이지
 app.get("/delete/:no",function(req,res){
     //db안에 데이터 삭제
-    db.collection("portfolio1_board").deleteOne({brdid:Number(req.params.no)},function(err,result){
-        res.redirect("/brdlist");
+    db.collection("prdlist").deleteOne({brdid:Number(req.params.no)},function(err,result){
+        res.redirect("/prdlist");
     });
 });
 
 //게시글 상세화면 get 요청  /:변수명  작명가능
 //db안에 해당 게시글번호에 맞는 데이터만 꺼내오고 ejs파일로 응답
-// app.get("/brddetail/:no",function(req,res){
-//     db.collection("portfolio1_board").findOne({brdid:Number(req.params.no)},function(err,result1){
-//         //게시글 갖고오고 -> 해당 게시글 번호에 맞는 댓글들만 갖고오자
-//         db.collection("portfolio1_comment").find({comPrd:result1.brdid}).toArray(function(err,result2){
-//             //사용자에게 응답 ->게시글에 관련된 데이터 / 로그인 유저정보 / 댓글에 관련된 데이터
-//             res.render("brddetail",{brdData:result1,userData:req.user,commentData:result2});
-//         });
-//     });
-// });
+app.get("/prddetail/:no",function(req,res){
+    db.collection("prdlist").findOne({brdid:Number(req.params.no)},function(err,result1){
+        //게시글 갖고오고 -> 해당 게시글 번호에 맞는 댓글들만 갖고오자
+        db.collection("portfolio1_comment").find({comPrd:result1.brdid}).toArray(function(err,result2){
+            //사용자에게 응답 ->게시글에 관련된 데이터 / 로그인 유저정보 / 댓글에 관련된 데이터
+            res.render("prddetail",{prdData:result1,userData:req.user,commentData:result2});
+        });
+    });
+});
 
 //댓글 작성 후 db에 추가하는 요청
 app.post("/addcomment",function(req,res){
@@ -464,13 +500,14 @@ app.get("/my",function(req,res){
     //원래는 mypage.ejs파일에서 원래 비밀번호 입력창과 /변경할 비밀번호 입력창
     //조건문으로 db에 있는 비밀번호와 mypage에서 입력한 원래 비밀번호가 일치하면
     //db 에 있는 비번 find
-
-    if(req.body.originpass === req.user.joinpass){
-    db.collection("portfolio1_join").findOne({joinpass:req.body.originpass},function(err,result){
+    
+    db.collection("user").findOne({joinpass:req.body.originpass},function(err,result){
         if(result){
-            db.collection("portfolio1_join").updateOne({joinid:req.user.joinid},{$set:{
+            db.collection("user").updateOne({joinid:req.user.joinid},{$set:{
                 joinpass:req.body.userpass,
-                joinnick:req.body.usernick
+                joinnick:req.body.usernick,
+                sido:req.body.city1,
+                sigugun:req.body.city2,
             }},function(err,result){
                 res.redirect("/");
             });
@@ -479,8 +516,4 @@ app.get("/my",function(req,res){
             res.send("<script>alert('원래 비밀번호를 제대로 입력해주세요'); location.href='/my'; </script>");
         }
     });
-    }
-    else{
-        res.send("<script>alert('원래 비밀번호를 제대로 입력해주세요'); location.href='/my'; </script>");
-    }
   });

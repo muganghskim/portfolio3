@@ -34,12 +34,24 @@
                         <canvas id="myChart"></canvas>
                     </div>
                 </div>
+                <div class="adbox">
+                  <h3>이벤트</h3>
+                  <% for(let i=0; i < 5; i++){ %>
+                      <div class="line">
+                        <div class="imgWrap"><img src="/upload/<%-adData[i].thumbnail%>"></div>
+                        <div class="info">
+                          <h4><%-adData[i].name%></h4>
+                          <p><%-adData[i].conext%></p>
+                        </div>
+                        <p class="time"><%-adData[i].time%></p>
+                      </div>
+                  <% } %>
+                </div>
                 <div class="prdbox"></div>
-                <div class="mybox"></div>
                 <div class="newsbox"></div>
                 <div class="chart2box"></div>
                 <div class="chart3box"></div>
-                <div class="addbox"></div>
+                <div class="mybox"></div>
             </div>
         </div>
     <%- include("common/footer.ejs") %>

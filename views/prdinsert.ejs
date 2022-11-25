@@ -4,89 +4,90 @@
         location.href = "/login";
     </script>
 <% } %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품등록 페이지</title>
+    <%- include("common/link.ejs") %>
+</head>
+<body>
 <%- include("common/header") %>
-<div class="contact_us">
-    <div class="center">
-        <h2>갤러리 작성</h2>
-        <p>어메스커피에 대한 다양한 의견을 작성해주세요.</p>
-        <div class="admininfo">
-            <div class="info_list">
-                <div><i class="fa-solid fa-location-dot"></i></div>
-                <h5>매장 주소</h5>
-                <p>고양시 일산서구 덕이동</p>
-            </div>
-            <div class="info_list">
-                <div><i class="fa-solid fa-phone"></i></div>
-                <h5>전화번호</h5>
-                <p>+55 418 652 8973</p>
-            </div>
-            <div class="info_list">
-                <div><i class="fa-solid fa-envelope-open-text"></i></div>
-                <h5>이메일 주소</h5>
-                <p>rhgustmfrh@naver.com</p>
-            </div>
-            <div class="info_list">
-                <div><i class="fa-solid fa-globe"></i></div>
-                <h5>웹 주소</h5>
-                <p>rhgustmfrh@naver.com</p>
-            </div>
+<%- include("common/hbgmenu.ejs") %>
+<div id="container">
+    <div class="prdaddWrap">
+        <div class="center"> 
+            <form class="prdInsert" enctype="multipart/form-data" action="/addprd" method="post">
+                <h2>상품등록</h2>
+                <p>본인이 거래하실 상품을 등록해주세요~</p>
+                <div class="line auther">
+                    <% if(userData){ %>
+                    <p>작성자 : <%- userData.joinnick %></p>
+                    <% } %>
+                </div>
+                <div class="line">
+                    <input class="subject" type="text" name="subject" placeholder="제목">
+                </div>
+                <textarea id="context" name="context" placeholder="내용 작성"></textarea>
+                
+                <div class="line line2">
+                    <select class="category" name="prdoption">
+                        <option value="생활가전">생활가전</option>
+                        <option value="의류">의류/잡화</option>
+                        <option value="스포츠">스포츠/레저</option>
+                        <option value="취미">취미/게임</option>
+                        <option value="도서">도서/티켓</option>
+                        <option value="식품">식품</option>
+                        <option value="기타중고">기타중고</option>
+                    </select>
+                    <input class="price" type="text" name="price" placeholder="가격">
+                </div>
+                <div class="addfileWrap">
+                    <span>제품 이미지를 첨부해 주세요.</span>
+                    <label for="addfile">파일첨부</label>
+                    <input id="addfile" type="file" name="addfile">
+                </div>
+                <button id="submitBtn" type="submit">작성하기</button>
+            </form>
         </div>
-        <form class="prdInsert" enctype="multipart/form-data" action="/addprd" method="post">
-            <div class="line">
-                <% if(userData){ %>
-                <p><%- userData.joinnick %></p>
-                <% } %>
-            </div>
-            <div class="line">
-                <input class="subject" type="text" name="subject" placeholder="제목">
-            </div>
-            <div class="line">
-                <select class="category" name="prdoption">
-                    <option value="생활가전">생활가전</option>
-                    <option value="의류">의류/잡화</option>
-                    <option value="스포츠">스포츠/레저</option>
-                    <option value="취미">취미/게임</option>
-                    <option value="도서">도서/티켓</option>
-                    <option value="식품">식품</option>
-                    <option value="기타중고">기타중고</option>
-                </select>
-            </div>
-            <textarea id="context" name="context" placeholder="내용 작성"></textarea>
-            <div class="addfileWrap">
-                <label for="addfile">파일첨부</label>
-                <input id="addfile" type="file" name="addfile">
-                <span>제품 이미지를 첨부해 주세요.</span>
-            </div>
-            <button id="submitBtn" type="submit">작성하기</button>
-        </form>
     </div>
 </div>
 <%- include("common/footer") %>
 <!-- 구역이동 및 햄버거 메뉴 -->
-<script src="/js/section.js"></script>
 <script>
     const submitBtn = document.querySelector("#submitBtn");
     const titleResult = document.querySelector(".subject");
     const contextResult = document.querySelector("#context");
     const submitForm = document.querySelector(".brdInsert");
+    const price = document.querySelector(".price");
 
     submitBtn.addEventListener("click",function(e){
         
         //문자열의 띄어쓰기 공백들을 제거해주는 문자열처리 함수 trim()
-
+        let priceCheck = /^[0-9]{2,10}$/
+        let priceValue = price.value;
         let submitValue = titleResult.value;
         let submitValue2 = contextResult.value;
         submitValue = submitValue.trim();
         submitValue2 = submitValue2.trim();
 
+        let checkPrice = priceCheck.test(priceValue);
+
         if(submitValue === "" || submitValue2 === ""){
             e.preventDefault();
             alert("제목과 내용을 입력해주세요");
-        } 
+        }
+        else if(!checkPrice){
+            e.preventDefault();
+            alert("가격을 숫자로 다시 입력해주세요");
+        }
         else{
             submitForm.submit();
         }
     });
 </script>
+<script src="/js/lefttap.js"></script>
 </body>
 </html>

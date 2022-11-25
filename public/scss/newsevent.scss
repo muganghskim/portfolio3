@@ -32,6 +32,50 @@
                     }
                 }
             }
+            .tap2{
+                justify-content: flex-start;
+                margin-left: 150px;
+            }
+            //공지사항 Wrap
+            .linehd{
+                display: flex;
+                width: 80%;
+                margin: 20px auto;
+                border-bottom:1px solid #591e55bb;
+                padding-bottom: 10px;
+                line-height: 50px;
+                color: #591e55e7;
+                font-size: 15px;
+                font-weight: bold;
+                p{
+                    width: 150px;
+                }
+            }
+            .line{
+                width: 80%;
+                margin: 20px auto;
+                padding-bottom: 10px;
+                display: flex;
+                border-bottom: 1px solid #591e5563;
+                p{
+                    width: 150px;
+                    line-height: 50px;
+                    font-size: 15px;
+                    color: #000;
+                }
+                .adlist{
+                    display: block;
+                    width: 70%;
+                    p{
+                        width: 100%;
+                        &:hover{
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+
+            //이벤트 Wrap
             .brdWrap{
                 display: flex;
                 flex-wrap: wrap;

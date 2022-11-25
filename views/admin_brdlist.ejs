@@ -19,18 +19,22 @@
         <% for(let i=0; i < brdData.length; i++){ %>
         <div class="list">
             <h3><%-brdData[i].num%></h3>
+            <p><%-brdData[i].newsoption%></p>
             <p><%-brdData[i].name%></p>
             <p><%-brdData[i].time%></p>
-            <img src="/upload/<%-brdData[i].thumbnail%>">
         </div>
         <% } %>
     </div>
-    <!-- 뉴스를 등록하는 form태그 구간 -->
-    <form enctype="multipart/form-data" action="/add/brdlist" method="post">
+    <!-- 공지사항을 등록하는 form태그 구간 -->
+    <form action="/add/brdlist" method="post">
         <input type="text" name="name" placeholder="제목">
+        <select name="newsoption">
+            <option value="서비스">서비스</option>
+            <option value="작업">작업</option>
+            <option value="업데이트">업데이트</option>
+        </select>
         <textarea name="context" placeholder="설명"></textarea>
-        <input type="file" name="thumbnail">
-        <button type="submit">뉴스등록</button>
+        <button type="submit">공지사항등록</button>
     </form>
 </body>
 </html>

@@ -1,0 +1,77 @@
+#container .loginWrap {
+  background-color: rgba(184, 142, 182, 0.2);
+}
+#container .loginWrap .center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 900px;
+}
+#container .loginWrap .center .formWrap {
+  padding: 20px;
+  background-color: #fff;
+}
+#container .loginWrap .center .formWrap h3 {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+#container .loginWrap .center .formWrap #join_form input {
+  margin-bottom: unset;
+}
+#container .loginWrap .center .formWrap #myupt input {
+  margin-bottom: unset;
+}
+#container .loginWrap .center .formWrap #myupt .userid {
+  display: block;
+  width: 400px;
+  line-height: 40px;
+  border: 1px solid rgba(184, 142, 182, 0.5333333333);
+  background-color: rgba(184, 142, 182, 0.2);
+  margin-bottom: 30px;
+  padding-left: 15px;
+  box-sizing: border-box;
+}
+#container .loginWrap .center .formWrap #myupt #originpass {
+  margin-bottom: 30px;
+}
+#container .loginWrap .center .formWrap form {
+  margin-top: 20px;
+}
+#container .loginWrap .center .formWrap form input {
+  display: block;
+  width: 400px;
+  line-height: 40px;
+  border: 1px solid rgba(184, 142, 182, 0.5333333333);
+  margin-bottom: 30px;
+  padding-left: 15px;
+  box-sizing: border-box;
+}
+#container .loginWrap .center .formWrap form button {
+  display: block;
+  width: 90px;
+  height: 30px;
+  background-color: rgba(89, 30, 85, 0.7960784314);
+  color: #fff;
+  border: none;
+  margin: 20px auto 10px;
+  cursor: pointer;
+}
+#container .loginWrap .center .formWrap form .message {
+  line-height: 30px;
+  height: 30px;
+  font-size: 12px;
+}
+#container .loginWrap .center .formWrap .path_regi, #container .loginWrap .center .formWrap .path_login {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+#container .loginWrap .center .formWrap .path_regi a, #container .loginWrap .center .formWrap .path_login a {
+  color: rgba(89, 30, 85, 0.7960784314);
+}
+#container .loginWrap .center .formWrap .city1, #container .loginWrap .center .formWrap .city2 {
+  margin-top: 20px;
+  margin-right: 10px;
+  height: 30px;
+  border: 1px solid rgba(184, 142, 182, 0.5333333333);
+}

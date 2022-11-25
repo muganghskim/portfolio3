@@ -5,17 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입 페이지</title>
-    <link rel="stylesheet" href="/css/loginwrap.css">
+    <%- include("common/link.ejs") %>
 </head>
 <body>
+    <%- include("common/header.ejs") %>
+    <%- include("common/hbgmenu.ejs") %>
+    <div id="container">
     <div class="loginWrap">
         <div class="center">
             <div class="formWrap">
-                <h3 class="regi_title">회원으로 참여해주세요</h3>
-                <div class="pathWrap">
-                    <a href="/login">로그인</a>
-                    <a class="on" href="/join">회원가입</a>
-                </div>
+                <h3 class="regi_title">회원가입</h3>
+                <p>회원으로 참여해 주세요~</p>
                 <form id="join_form" action="/addjoin" method="post">
                     <input id="username" type="text" name="username" placeholder="Name">
                     <p class="message"></p>
@@ -23,16 +23,26 @@
                     <p class="message"></p>
                     <input id="userpass" type="password" name="userpass" placeholder="Password">
                     <p class="message"></p>
+                    <p>주로 거래하실 지역을 선택해 주세요~</p>
+                    <!-- 시/도 선택 -->
+                    <select class="city1" name="city1" required>
+                        <option value>시/도 선택</option>
+                    </select>
+                    <!-- 구/군 선택 -->
+                    <select class="city2" name="city2" required>
+                        <option value>구/군 선택</option>
+                    </select>
                     <button id="submitBtn" type="submit">회원가입</button>
                 </form>
                 <p class="path_login">이미 회원이신가요? <a href="/login">로그인은 여기로</a></p>
-                <a class="path_home" href="/">HOME</a>
-            </div>
-            <div class="left_imgWrap">
-                <img src="/img/login.jpg">
             </div>
         </div>
     </div>
+    </div>
+    <%- include("common/footer.ejs") %>
     <script src="/js/validation.js"></script>
+    <script src="/js/lefttap.js"></script>
+    <script src="/js/hangjungdong.js"></script>
+    <script src="/js/storeselect.js"></script>
 </body>
 </html>

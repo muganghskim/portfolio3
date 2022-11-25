@@ -1,0 +1,191 @@
+#container .prdaddWrap {
+  background-color: rgba(184, 142, 182, 0.2);
+}
+#container .prdaddWrap .center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 900px;
+}
+#container .prdaddWrap .center .prdInsert {
+  padding: 20px;
+  background-color: #fff;
+}
+#container .prdaddWrap .center .prdInsert h2 {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+#container .prdaddWrap .center .prdInsert > p {
+  margin-bottom: 20px;
+}
+#container .prdaddWrap .center .prdInsert .auther {
+  background-color: rgba(184, 142, 182, 0.2);
+}
+#container .prdaddWrap .center .prdInsert .line {
+  display: block;
+  width: 400px;
+  line-height: 40px;
+  border: 1px solid rgba(184, 142, 182, 0.5333333333);
+  margin-bottom: 30px;
+  padding-left: 15px;
+  box-sizing: border-box;
+}
+#container .prdaddWrap .center .prdInsert .line input {
+  width: 100%;
+  list-style: 40px;
+  border: none;
+}
+#container .prdaddWrap .center .prdInsert #context {
+  outline: none;
+  width: 400px;
+  height: 200px;
+  resize: none;
+  padding: 15px;
+  box-sizing: border-box;
+  border: 1px solid rgba(184, 142, 182, 0.5333333333);
+  margin-bottom: 20px;
+}
+#container .prdaddWrap .center .prdInsert .line2 {
+  display: flex;
+  justify-content: space-between;
+}
+#container .prdaddWrap .center .prdInsert .line2 .price {
+  width: 50%;
+  line-height: 40px;
+}
+#container .prdaddWrap .center .prdInsert .line2 .category {
+  background-color: #fff;
+  border: none;
+}
+#container .prdaddWrap .center .prdInsert .addfileWrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+#container .prdaddWrap .center .prdInsert .addfileWrap input {
+  display: none;
+}
+#container .prdaddWrap .center .prdInsert .addfileWrap label {
+  margin-left: 15px;
+  background-color: rgba(184, 142, 182, 0.2);
+  width: 70px;
+  text-align: center;
+  border-radius: 8px;
+  line-height: 30px;
+}
+#container .prdaddWrap .center .prdInsert button {
+  display: block;
+  width: 90px;
+  height: 30px;
+  background-color: rgba(89, 30, 85, 0.7960784314);
+  color: #fff;
+  border: none;
+  margin: 20px auto 10px;
+  cursor: pointer;
+}
+#container .prdhd {
+  background-color: rgba(184, 142, 182, 0.2);
+}
+#container .prdhd .gal_tapmenu {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+#container .prdhd .gal_tapmenu li {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  width: 80px;
+  line-height: 40px;
+  text-align: center;
+  background-color: rgba(184, 142, 182, 0.2);
+}
+#container .prdhd .gal_tapmenu li a {
+  display: block;
+  width: 100%;
+  color: rgba(89, 30, 85, 0.6117647059);
+}
+#container .prdhd .gal_tapmenu li.on {
+  background-color: rgba(184, 142, 182, 0.3647058824);
+}
+#container .prdhd .gal_tapmenu li.on a {
+  color: rgba(89, 30, 85, 0.7960784314);
+}
+#container .gridWrap {
+  background-color: rgba(184, 142, 182, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+}
+#container .gridWrap .grid_list {
+  width: 23%;
+  margin: 1%;
+  background-color: #fff;
+}
+#container .gridWrap .grid_list .list_img {
+  position: relative;
+}
+#container .gridWrap .grid_list .list_img:hover::before {
+  opacity: 1;
+}
+#container .gridWrap .grid_list .list_img:hover .img_bot {
+  opacity: 1;
+}
+#container .gridWrap .grid_list .list_img::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: all 0.5s;
+}
+#container .gridWrap .grid_list .list_img .img_bot {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  opacity: 0;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+#container .gridWrap .grid_list .list_img .img_bot li {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  border-radius: 50%;
+  z-index: 5;
+  text-align: center;
+  margin-top: 10px;
+  transition: all 0.5s;
+}
+#container .gridWrap .grid_list .list_img .img_bot li:hover {
+  background-color: rgba(89, 30, 85, 0.7960784314);
+}
+#container .gridWrap .grid_list .list_img .img_bot li:hover i {
+  color: #fff;
+}
+#container .gridWrap .grid_list .list_img .img_bot li i {
+  line-height: 50px;
+  font-size: 20px;
+  color: rgba(89, 30, 85, 0.7960784314);
+}
+#container .gridWrap .grid_list .list_img img {
+  width: 100%;
+  height: 400px;
+}
+#container .gridWrap .grid_list .list_info {
+  padding: 20px;
+}
+#container .gridWrap .grid_list .list_info h3 {
+  margin-bottom: 15px;
+}
+#container .gridWrap .grid_list .list_info h3 a {
+  color: #000;
+}
+#container .gridWrap .grid_list .list_info p {
+  color: #777;
+  margin-bottom: 10px;
+}
+#container .gridWrap .grid_list .list_info .price {
+  color: rgba(89, 30, 85, 0.7960784314);
+}

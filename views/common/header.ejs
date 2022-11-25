@@ -13,6 +13,7 @@
             <a href="/login"><i class="fa-solid fa-arrow-right"></i>로그인</a>
             <a href="/join"><i class="fa-solid fa-user"></i>회원가입</a>
         <% } else { %>
+            <a class="prdinsertBtn" href="/prdinsert"><i class="fa-solid fa-circle-plus"></i>상품등록</a>
             <a class="username" href="/my"><%- userData.joinnick %>님</a>
             <a class="logout" href="/logout">로그아웃</a>
         <% } %>

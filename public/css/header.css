@@ -46,16 +46,20 @@
 }
 #header .joinWrap {
   display: flex;
+  margin-right: 25px;
 }
 #header .joinWrap > a {
   display: block;
   width: 80px;
-  margin: 0 10px;
+  margin: 0 0px;
   color: #777;
   line-height: 60px;
 }
 #header .joinWrap > a i {
   margin-right: 5px;
+}
+#header .joinWrap .prdinsertBtn {
+  margin-right: 20px;
 }
 
 .hbgMenu.on {

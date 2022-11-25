@@ -4,63 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>뉴스 페이지</title>
+    <title>공지사항 페이지</title>
     <%- include("common/link.ejs") %>
 </head>
 <body>
     <%- include("common/header.ejs") %>
-    <div class="newsWrap">
-        <div class="center">
+    <%- include("common/hbgmenu.ejs") %>
+    <div id="container">
+        <div class="boxhd">
             <h2>공지사항</h2>
-            <ul class="gal_tapmenu">
-                <li><a href="/board">새로운소식</a></li>
-                <li><a href="/board/news">보도자료</a></li>
-            </ul>
-            <div class="news_tap">
-                <% for(let i =0; i <brdData.length; i++){ %>
-                    <div class="news_list">
-                        <div class="left">
-                            <p>보도자료</p>
-                            <h3><%- brdData[i].name%></h3>
-                        </div>
-                        <div class="right">
-                            <p><%- brdData[i].time%></p>
-                            <span><i class="fa-solid fa-angle-down"></i></span>
-                        </div>
-                    </div>
-                    <div class="news_depth">
-                        <img src="/upload/<%-brdData[i].thumbnail%>">
-                        <p><%-brdData[i].conext%></p>
-                    </div>
-                <% } %>
+            <p class="path">path</p>
+        </div>
+        <div class="newsWrap">
+            <div class="center">
+                <ul class="gal_tapmenu">
+                    <li><a href="/news">공지사항</a></li>
+                    <li><a href="/event">이벤트</a></li>
+                </ul>
+                <ul class="gal_tapmenu tap2">
+                    <li><a href="/news/all">전체</a></li>
+                    <li><a href="/news/service">서비스</a></li>
+                    <li><a href="/news/work">작업</a></li>
+                    <li><a href="/news/upt">업데이트</a></li>
+                </ul>
+                <div class="linehd">
+                    <p>작성일</p>
+                    <p>카테고리</p>
+                    <p>제목</p>
+                </div>
+                <div class="newsBox">
+                    <% for(let i =0; i <brdData.length; i++){ %>
+                            <div class="newslist line">
+                                <p><%-brdData[i].time%></p>
+                                <p><%-brdData[i].newsoption%></p>
+                                <a class="adlist" href="/brddetail/<%-brdData[i].num%>">
+                                    <p><%-brdData[i].name%></p>
+                                </a>
+                            </div>
+                    <% } %>
+                </div>
             </div>
         </div>
     </div>
     <%- include("common/footer.ejs") %>
-    <script src="/js/dropdown.js"></script>
-    <script src="/js/scroll.js"></script>
+    <script src="/js/lefttap.js"></script>
     <script src="/js/tapmenu.js"></script>
-    <script>
-        //news_tap 클릭시
-        const newsTap = document.querySelectorAll(".news_list");
-        const newsDepth = document.querySelectorAll(".news_depth");
-
-        newsTap.forEach(function(item,index){
-            item.addEventListener("click",function(){
-                if(newsDepth[index].classList.contains("on")){
-                    newsDepth[index].classList.remove("on");
-                    item.classList.remove("on");
-                }
-                else{
-                    newsDepth.forEach(function(item,index){
-                        item.classList.remove("on");
-                        newsTap[index].classList.remove("on");
-                    });
-                    newsDepth[index].classList.add("on");
-                    item.classList.add("on");
-                }
-            });
-        });
-    </script>
 </body>
 </html>
