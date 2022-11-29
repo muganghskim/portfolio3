@@ -52,6 +52,34 @@
             </div>
         <% } %>
     </div>
+    <!-- 페이징 번호 생성된 구간 -->
+    <% if(pageNumber != "nopage"){ %>
+        <ul class="paging">
+            <% if(pageNumber <= 1){ %>
+                <li>처음</li>
+            <% } else { %>
+                <li><a href="?page=1">처음</a></li>
+            <% } %>
+            <% if(blockStart > totalBlock){ %>
+                <li><a href="?page=<%- blockStart - 1 %>">이전</a></li>
+            <% } %>
+            <% for(let i = blockStart; i <= blockEnd; i++){ %>
+                <% if(pageNumber == i){ %>
+                <li class="highlight"><a href="?page=<%- i %>"><%- i %></a></li>
+                <% } else { %>
+                <li><a href="?page=<%- i %>"><%- i %></a></li>
+                <% } %>
+            <% } %>
+            <% if(blockNum < totalBlock){ %>
+                <li><a href="?page=<%- blockEnd + 1 %>">다음</a></li>
+            <% } %>
+            <% if(pageNumber >= paging){ %>
+                <li>마지막</li>
+            <% } else { %>
+                <li><a href="?page=<%- paging %>">마지막</a></li>
+            <% } %>
+        </ul>
+    <% } %>
 </div>
 <%- include("common/footer") %>
 <!-- 햄버거 메뉴 -->

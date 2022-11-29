@@ -1,83 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상세페이지</title>
+    <%- include("common/link.ejs") %>
+</head>
+<body>
 <%- include("common/header") %>
-<div class="title_img">
-    <div class="center_title">
-        <h2>상세 페이지</h2>
-        <p>갤러리 / 상세 페이지</p>
+<%- include("common/hbgmenu.ejs") %>
+<div id="container">
+    <div class="boxhd">
+        <h2>상품 상세페이지</h2>
+        <p class="path">path</p>
     </div>
-</div>
-<div class="detail_center">
-    <div class="detailWrap">
-        <div class="imgWrap">
-            <% if(prdData.prdfile) { %>
-            <img src="/upload/<%- prdData.prdfile %>">
-            <% } %>
-        </div>
-        <h3><%- prdData.prdsubject %></h3>
-        <ul class="detail_info">
-            <li><i class="fa-solid fa-person"></i><%- prdData.prdauther %></li>
-            <li><i class="fa-solid fa-calendar-days"></i><%- prdData.prdtime %></li>
-        </ul>
-        <p class="context"><%- prdData.prdcontext %></p>
-    </div>
-    <div class="btnWrap">
-        <a class="listpoint" href="/prdlist">목록</a>
-        <!-- 서버.js에서 넘겨준 userData에 있는 nick과 
-        데이터베이스에서 가지고온 brdData에 있는 nick과 일치하면
-        수정 삭제 버튼이 보인다. -->
-        <% if(userData){ %>
-            <% if(userData.joinnick === prdData.prdauther){ %>
-                <a class="listpoint" href="/prdupt/<%- prdData.prdid %>">수정</a>
-                <a class="listpoint delete" href="/delete/<%- prdData.prdid %>">삭제</a>
-            <% } %>
-        <% } %>
-    </div>
-    <h3>댓글</h3>
-    <!-- 댓글 출력 구간 -->
-    <% for(let i = 0; i < commentData.length; i++){ %>
-    <div class="comment_box">
-        <div class="wrap">
-            <div class="comment_icon"><img src="/img/person1.png"></div>
-            <div class="comment_output">
-                <div class="comment_auther"><%- commentData[i].comAuther %></div>
-                <div class="comment_date"><%- commentData[i].comDate %></div>
-                <div class="comment_context"><%- commentData[i].comContext %></div>
+    <div class="detail_center">
+        <div class="detailWrap">
+            <div class="imgWrap">
+                <% if(prdData.prdfile) { %>
+                <img src="/upload/<%- prdData.prdfile %>">
+                <% } else { %>
+                    <div class="noimg">썸네일 없음</div>
+                <% } %>
+            </div>
+            <div class="detail_info">
+                <h3><%- prdData.prdsubject %></h3>
+                <ul class="detail_icon">
+                    <li>가격 : <%- prdData.prdprice %>원</li>
+                    <li><i class="fa-solid fa-person"></i><%- prdData.prdauther %></li>
+                    <li><i class="fa-solid fa-location-dot"></i><%- prdData.prdlocal2 %></li>
+                    <li><i class="fa-solid fa-calendar-days"></i><%- prdData.prdtime %></li>
+                </ul>
+                <p class="context"><%- prdData.prdcontext %></p>
+                <ul class="detail_icon2">
+                    <li class="icfir">공유하기</li>
+                    <li class="ic"><i class="fa-brands fa-facebook-f"></i></li>
+                    <li class="ic"><i class="fa-brands fa-twitter"></i></li>
+                    <li class="ic"><i class="fa-solid fa-wifi"></i></li>
+                    <li class="ic"><i class="fa-brands fa-instagram"></i></li>
+                    <li class="ic"><i class="fa-brands fa-google"></i></li>
+                </ul>
+                <div class="btnWrap">
+                    <a class="listpoint" href="/prdlist">목록</a>
+                    <a class="listpoint" href="#">구매하기</a>
+                    <a class="listpoint" href="#">채팅하기</a>
+                    <!-- 서버.js에서 넘겨준 userData에 있는 nick과 
+                    데이터베이스에서 가지고온 brdData에 있는 nick과 일치하면
+                    수정 삭제 버튼이 보인다. -->
+                    <% if(userData){ %>
+                        <% if(userData.joinnick === prdData.prdauther){ %>
+                            <a class="listpoint" href="/prdupt/<%- prdData.prdid %>">수정</a>
+                            <a class="listpoint delete" href="/delete/<%- prdData.prdid %>">삭제</a>
+                        <% } %>
+                    <% } %>
+                </div>
             </div>
         </div>
-        <% if(userData){ %>
-        <% if(userData.joinnick === commentData[i].comAuther){ %>
-        <div class="comment_btn">
-            <a class="update_comment" href="#">댓글수정</a>
-            <a class="del_comment" href="/deletecomment/<%- commentData[i].comNo %>">댓글삭제</a>
-        </div>
-        <form class="comupdate_form" action="/updatecomment" method="post">
-            <input type="hidden" name="comNo" value="<%- commentData[i].comNo %>">
-            <textarea class="comContext" name="comContext"><%- commentData[i].comContext %></textarea>
-            <div class="btnWrap">
-                <button class="comment_ok" type="submit">수정완료</button>
-                <button class="comment_no" type="button">취소</button>
+        <div class="commentWrap">
+            <h3>댓글</h3>
+            <!-- 댓글 출력 구간 -->
+            <% for(let i = 0; i < commentData.length; i++){ %>
+            <div class="comment_box">
+                <div class="wrap">
+                    <div class="comment_icon"><img src="/img/person1.png"></div>
+                    <div class="comment_output">
+                        <div class="comment_auther"><%- commentData[i].comAuther %></div>
+                        <div class="comment_date"><%- commentData[i].comDate %></div>
+                        <div class="comment_context"><%- commentData[i].comContext %></div>
+                    </div>
+                </div>
+                <% if(userData){ %>
+                <% if(userData.joinnick === commentData[i].comAuther){ %>
+                <div class="comment_btn">
+                    <a class="update_comment" href="#">댓글수정</a>
+                    <a class="del_comment" href="/deletecomment/<%- commentData[i].comNo %>">댓글삭제</a>
+                </div>
+                <form class="comupdate_form" action="/updatecomment" method="post">
+                    <input type="hidden" name="comNo" value="<%- commentData[i].comNo %>">
+                    <textarea class="comContext" name="comContext"><%- commentData[i].comContext %></textarea>
+                    <div class="btnWrap">
+                        <button class="comment_ok" type="submit">수정완료</button>
+                        <button class="comment_no" type="button">취소</button>
+                    </div>
+                </form>
+                <% } %>
+                <% } %>
             </div>
-        </form>
-        <% } %>
-        <% } %>
+            <% } %>
+            <!-- 해당 게시글 페이지 내에서 댓글 입력하는 구간 -->
+            <% if(userData){ %>
+            <div class="comment">
+                <h3>댓글 입력</h3>
+                <form id="comment_form" action="/addcomment" method="post">
+                    <!-- 댓글 입력시 해당 게시글의 번호값도 같이 전송 
+                        댓글은 어떤 게시글 안에 소속될 것인지 표시하기 위해서 -->
+                    <input type="hidden" name="prdid" value="<%- prdData.prdid %>">
+                    <textarea id="context" name="comment_text"></textarea>
+                    <button id="submitBtn" type="submit">댓글등록</button>
+                </form>
+            </div>
+            <% } %>
+        </div>
     </div>
-    <% } %>
-    <!-- 해당 게시글 페이지 내에서 댓글 입력하는 구간 -->
-    <% if(userData){ %>
-    <div class="comment">
-        <h3>댓글 입력</h3>
-        <form id="comment_form" action="/addcomment" method="post">
-            <!-- 댓글 입력시 해당 게시글의 번호값도 같이 전송 
-                댓글은 어떤 게시글 안에 소속될 것인지 표시하기 위해서 -->
-            <input type="hidden" name="prdid" value="<%- prdData.prdid %>">
-            <textarea id="context" name="comment_text"></textarea>
-            <button id="submitBtn" type="submit">댓글등록</button>
-        </form>
-    </div>
-    <% } %>
 </div>
 <%- include("common/footer") %>
-<!-- 구역이동 및 햄버거 메뉴 -->
-<script src="/js/section.js"></script>
+<!-- 햄버거 메뉴 -->
+<script src="/js/lefttap.js"></script>
 <script>
     const del_board = document.querySelector(".delete");
     if(del_board){
@@ -100,7 +129,6 @@
     const del_comment = document.querySelectorAll(".del_comment");
     
     //작성취소를 누르면 원래 댓글 내용으로 리셋
-    console.log(del_comment);
     let originText = [];
     //반복문으로 클릭 이벤트 구현
     for(let i=0; i < uptCom.length; i++){
@@ -145,22 +173,27 @@
     const submitBtn = document.querySelector("#submitBtn");
     const contextResult = document.querySelector("#context");
     const submitForm = document.querySelector("#comment_form");
+    const commentWrap = document.querySelector(".commentWrap");
+    if(submitForm){
+        submitBtn.addEventListener("click",function(e){
+            
+            //문자열의 띄어쓰기 공백들을 제거해주는 문자열처리 함수 trim()
 
-    submitBtn.addEventListener("click",function(e){
-        
-        //문자열의 띄어쓰기 공백들을 제거해주는 문자열처리 함수 trim()
+            let submitValue = contextResult.value;
+            submitValue = submitValue.trim();
 
-        let submitValue = contextResult.value;
-        submitValue = submitValue.trim();
-
-        if(submitValue === ""){
-            e.preventDefault();
-            alert("내용을 입력해주세요");
-        } 
-        else{
-            submitForm.submit();
-        }
-    });
+            if(submitValue === ""){
+                e.preventDefault();
+                alert("내용을 입력해주세요");
+            } 
+            else{
+                submitForm.submit();
+            }
+        });
+    }
+    else{
+        commentWrap.style.height = "250px";
+    }
 </script>
 </body>
 </html>

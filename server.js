@@ -47,8 +47,24 @@ const upload = multer({ storage: storage })
 //메인페이지 get요청
 app.get("/",function(req,res){
   //db에 저장되어 있는 상품목록들 find로 찾아 와서 전송
-  db.collection("adlist").find({}).toArray(function(err,result){
-    res.render("index",{adData:result,userData:req.user});
+  db.collection("adlist").find({}).toArray(function(err,result1){
+    db.collection("brdlist").find({}).toArray(function(err,result2){
+      if(!req.user){
+        res.render("index",{adData:result1,newsData:result2,userData:req.user});
+      }
+      else{
+        db.collection("prdlist").find({prdauther:req.user.joinnick}).sort({prdid:-1}).toArray(function(err,result3){
+          let maxcount = [];
+          result3.forEach(function(item,index){
+            maxcount.push(item.prdviews);
+          });
+          let maxcountresult = Math.max(...maxcount);
+          db.collection("prdlist").findOne({prdviews:maxcountresult},function(err,result4){
+            res.render("index",{adData:result1,newsData:result2,prdData:result3,userData:req.user,maxCount:result4});
+          });
+        });
+      }
+    });
   });
 });
 
@@ -288,70 +304,70 @@ passport.deserializeUser(function (id, done) {
     })
 });
 
+//각각의 범주마다 페이징 처리위한 객체 생성
+let prdobject = [{prdoption:"생활가전"},
+                 {prdoption:"의류"},
+                 {prdoption:"스포츠"},
+                 {prdoption:"취미"},
+                 {prdoption:"도서"},
+                 {prdoption:"식품"},
+                 {prdoption:"기타중고"},
+                ];
+
+//페이징 함수 호출
+paging("/prdlist");
+paging("/prdlist/all");
+paging("/prdlist/1",prdobject[0]);
+paging("/prdlist/2",prdobject[1]);
+paging("/prdlist/3",prdobject[2]);
+paging("/prdlist/4",prdobject[3]);
+paging("/prdlist/5",prdobject[4]);
+paging("/prdlist/6",prdobject[5]);
+paging("/prdlist/7",prdobject[6]);
+
+//페이징 함수 정의
+function paging(para,para2){
   //상품게시판 목록 페이지 get 요청
-app.get("/prdlist",function(req,res){
-    //db안에 게시글 콜렉션 찾아서 데이터 전부 꺼내오고 ejs파일로 응답
-    db.collection("prdlist").find().sort({brdid:-1}).toArray(function(err,result){
-        res.render("prdlist",{prdData:result,userData:req.user})
-    });
-});
-
-//상품게시판 전체목록 페이지 get 요청
-app.get("/prdlist/all",function(req,res){
-  //db안에 게시글 콜렉션 찾아서 데이터 전부 꺼내오고 ejs파일로 응답
-  db.collection("prdlist").find().sort({brdid:-1}).toArray(function(err,result){
-      res.render("prdlist",{prdData:result,userData:req.user})
+  app.get(para,async function(req,res){
+    //사용자가 게시판에 접속 시 몇번 페이징 번호로 접속했는지 체크
+    let pageNumber = (req.query.page == null) ? 1 : Number(req.query.page);
+    // 한 페이지당 보여줄 데이터 갯수
+    let perPage = 12;
+    // 한 블록당 보여줄 페이징 번호 갯수
+    let blockCount = 5;
+    // 현재 페이지 블록 구하기 
+    let blockNum = Math.ceil(pageNumber / blockCount);
+    //블록안에 있는 페이징의 시작번호값 알아내기
+    let blockStart = ((blockNum - 1) * blockCount) + 1;
+    //블록안에 있는 페이징의 끝번호값 알아내기
+    let blockEnd = blockStart + blockCount - 1;
+    //데이터 베이스 콜렉션에 있는 전체 객체의 갯수값 가져오는 명령어
+    let totalData = await db.collection("prdlist").countDocuments({});
+    //전체 데이터 값을 통해서 몇개의 페이징 번호가 만들어져야 하는지
+    let paging = Math.ceil(totalData / perPage);
+    //만약 블록안에있는 페이징의 끝 번호값이 전체 페이징 갯수보다 많다면 강제로 마지막 페이징 번호값으로 변경
+    if(blockEnd > paging){
+        blockEnd = paging;
+    }
+    //블록의 총 갯수
+    let totalBlock = Math.ceil(paging / blockCount);
+    //데이터베이스에 실제 값을 꺼내기 위해 몇개씩 꺼내올건지 설정 sort / skip / limit
+    let startFrom = (pageNumber - 1) * perPage
+      //db안에 게시글 콜렉션 찾아서 데이터 전부 꺼내오고 ejs파일로 응답
+      db.collection("prdlist").find(para2).sort({prdid:-1}).skip(startFrom).limit(perPage).toArray(function(err,result){
+          res.render("prdlist",{prdData:result,
+                                userData:req.user,
+                                paging:paging,
+                                pageNumber:pageNumber,
+                                blockStart:blockStart,
+                                blockEnd:blockEnd,
+                                blockNum:blockNum,
+                                totalBlock:totalBlock
+          })
+      });
   });
-});
+}
 
-//생활가전 페이지
-app.get("/prdlist/1",function(req,res){
-    db.collection("prdlist").find({prdoption:"생활가전"}).toArray(function(err,result){
-      res.render("prdlist",{prdData:result,userData:req.user});
-    });
-});
-
-  //의류 페이지
-app.get("/prdlist/2",function(req,res){
-    db.collection("prdlist").find({prdoption:"의류"}).toArray(function(err,result){
-      res.render("prdlist",{prdData:result,userData:req.user});
-    });
-});
-
-//스포츠 페이지
-app.get("/prdlist/3",function(req,res){
-    db.collection("prdlist").find({prdoption:"스포츠"}).toArray(function(err,result){
-      res.render("prdlist",{prdData:result,userData:req.user});
-    });
-});
-
-//취미 페이지
-app.get("/prdlist/4",function(req,res){
-    db.collection("prdlist").find({prdoption:"취미"}).toArray(function(err,result){
-      res.render("prdlist",{prdData:result,userData:req.user});
-    });
-});
-
-//도서 페이지
-app.get("/prdlist/5",function(req,res){
-    db.collection("prdlist").find({prdoption:"도서"}).toArray(function(err,result){
-      res.render("prdlist",{prdData:result,userData:req.user});
-    });
-});
-
-//식품 페이지
-app.get("/prdlist/6",function(req,res){
-    db.collection("prdlist").find({prdoption:"식품"}).toArray(function(err,result){
-      res.render("prdlist",{prdData:result,userData:req.user});
-    });
-});
-
-//기타중고 페이지
-app.get("/prdlist/7",function(req,res){
-    db.collection("prdlist").find({prdoption:"기타중고"}).toArray(function(err,result){
-      res.render("prdlist",{prdData:result,userData:req.user});
-    });
-});
 
 //상품게시판 작성 페이지 
 app.get("/prdinsert",function(req,res){
@@ -385,7 +401,8 @@ app.post("/addprd",upload.single('addfile'),function(req,res){
             prdprice:req.body.price,
             prdtime:time,
             prdfile:fileUpload,
-            prdoption:req.body.prdoption
+            prdoption:req.body.prdoption,
+            prdviews:0
         },function(err,result){
             db.collection("count").updateOne({name:"상품등록"},{$inc:{prdCount:1}},function(err,result){
                 res.redirect("/prdlist");
@@ -413,11 +430,11 @@ app.post("/update",upload.single('uptfile'),function(req,res){
         fileUpload = req.body.originfile;
     }
 
-    db.collection("prdlist").updateOne({brdid:Number(req.body.id)},{
+    db.collection("prdlist").updateOne({prdid:Number(req.body.id)},{
         $set:{
-            brdsubject:req.body.subject,
-            brdcontext:req.body.context,
-            brdfile:fileUpload     
+            prdsubject:req.body.subject,
+            prdcontext:req.body.context,
+            prdfile:fileUpload     
         }
     },function(err,result){
         res.redirect("/prddetail/" + req.body.id);
@@ -427,7 +444,7 @@ app.post("/update",upload.single('uptfile'),function(req,res){
 //게시글삭제 페이지
 app.get("/delete/:no",function(req,res){
     //db안에 데이터 삭제
-    db.collection("prdlist").deleteOne({brdid:Number(req.params.no)},function(err,result){
+    db.collection("prdlist").deleteOne({prdid:Number(req.params.no)},function(err,result){
         res.redirect("/prdlist");
     });
 });
@@ -435,31 +452,33 @@ app.get("/delete/:no",function(req,res){
 //게시글 상세화면 get 요청  /:변수명  작명가능
 //db안에 해당 게시글번호에 맞는 데이터만 꺼내오고 ejs파일로 응답
 app.get("/prddetail/:no",function(req,res){
-    db.collection("prdlist").findOne({brdid:Number(req.params.no)},function(err,result1){
+  db.collection("prdlist").updateOne({prdid:Number(req.params.no)},{$inc:{prdviews:1}},function(err,result){
+    db.collection("prdlist").findOne({prdid:Number(req.params.no)},function(err,result1){
         //게시글 갖고오고 -> 해당 게시글 번호에 맞는 댓글들만 갖고오자
-        db.collection("portfolio1_comment").find({comPrd:result1.brdid}).toArray(function(err,result2){
+        db.collection("comment").find({comPrd:result1.prdid}).toArray(function(err,result2){
             //사용자에게 응답 ->게시글에 관련된 데이터 / 로그인 유저정보 / 댓글에 관련된 데이터
             res.render("prddetail",{prdData:result1,userData:req.user,commentData:result2});
         });
     });
+  });
 });
 
 //댓글 작성 후 db에 추가하는 요청
 app.post("/addcomment",function(req,res){
     //몇번 댓글인지 번호 부여하기위한 작업
-    db.collection("portfolio1_count").findOne({name:"댓글"},function(err,result1){
+    db.collection("count").findOne({name:"댓글"},function(err,result1){
         //해당 게시글의 번호값도 함께 부여!
-        db.collection("portfolio1_board").findOne({brdid:Number(req.body.prdid)},function(err,result2){
+        db.collection("prdlist").findOne({prdid:Number(req.body.prdid)},function(err,result2){
             //ex12_comment 콜렉션에 댓글을 집어넣기
-            db.collection("portfolio1_comment").insertOne({
+            db.collection("comment").insertOne({
                 comNo:result1.commentCount+1,
-                comPrd:result2.brdid,
+                comPrd:result2.prdid,
                 comContext:req.body.comment_text,
                 comAuther:req.user.joinnick,
                 comDate:moment().tz("Asia/Seoul").format("YYYY-MM-DD HH:mm:ss")
             },function(err,result){
-                db.collection("portfolio1_count").updateOne({name:"댓글"},{$inc:{commentCount:1}},function(err,result){
-                    res.redirect("/brddetail/" + req.body.prdid);
+                db.collection("count").updateOne({name:"댓글"},{$inc:{commentCount:1}},function(err,result){
+                    res.redirect("/prddetail/" + req.body.prdid);
                     //상세페이지에서 댓글 입력시 보내준 게시글 번호로 ->상세페이지 이동 요청
                 });
             });
@@ -469,9 +488,9 @@ app.post("/addcomment",function(req,res){
 
 //댓글 업데이트 수정
 app.post("/updatecomment",function(req,res){
-    db.collection("portfolio1_comment").findOne({comNo:Number(req.body.comNo)},function(err,result1){
-        db.collection("portfolio1_comment").updateOne({comNo:Number(req.body.comNo)},{$set:{comContext:req.body.comContext}},function(err,result){
-            res.redirect("/brddetail/" + result1.comPrd);
+    db.collection("comment").findOne({comNo:Number(req.body.comNo)},function(err,result1){
+        db.collection("comment").updateOne({comNo:Number(req.body.comNo)},{$set:{comContext:req.body.comContext}},function(err,result){
+            res.redirect("/prddetail/" + result1.comPrd);
         });
     });
 });
@@ -479,10 +498,10 @@ app.post("/updatecomment",function(req,res){
 //댓글 삭제 요청
 app.get("/deletecomment/:no",function(req,res){
     //해당 댓글의 게시글 번호값을 찾아온 후 댓글을 삭제하고 난 다음에는 해당 상세페이지로 다시 이동
-    db.collection("portfolio1_comment").findOne({comNo:Number(req.params.no)},function(err,result1){
-        db.collection("portfolio1_comment").deleteOne({comNo:Number(req.params.no)},function(err,result2){
+    db.collection("comment").findOne({comNo:Number(req.params.no)},function(err,result1){
+        db.collection("comment").deleteOne({comNo:Number(req.params.no)},function(err,result2){
             //댓글 삭제 후 findOne으로 찾아온 comPrd
-            res.redirect("/brddetail/" + result1.comPrd);
+            res.redirect("/prddetail/" + result1.comPrd);
         });
     });
 });

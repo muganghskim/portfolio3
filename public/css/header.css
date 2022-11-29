@@ -82,17 +82,54 @@
   width: 100%;
 }
 .hbgMenu .nav .hbgGnb {
-  margin-left: 50px;
+  margin-left: 30px;
 }
 .hbgMenu .nav .hbgGnb .depthWrap2 {
+  position: relative;
   width: 150px;
+  padding-right: 60px;
+  padding-left: 10px;
   margin: 0 auto;
   line-height: 40px;
+  transition: all 0.5s;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.hbgMenu .nav .hbgGnb .depthWrap2:hover {
+  background-color: rgba(184, 142, 182, 0.2117647059);
+}
+.hbgMenu .nav .hbgGnb .depthWrap2 > a {
+  color: #555;
+}
+.hbgMenu .nav .hbgGnb .depthWrap2 > a i {
+  margin-right: 10px;
+}
+.hbgMenu .nav .hbgGnb .depthWrap2 .rightarrow, .hbgMenu .nav .hbgGnb .depthWrap2 .downarrow {
+  position: absolute;
+  color: #999;
+  right: 10px;
+  top: 0;
+}
+.hbgMenu .nav .hbgGnb .depthWrap2 .rightarrow.on {
+  display: none;
+}
+.hbgMenu .nav .hbgGnb .depthWrap2 .downarrow {
+  display: none;
+}
+.hbgMenu .nav .hbgGnb .depthWrap2 .downarrow.on {
+  display: block;
 }
 .hbgMenu .nav .hbgGnb .depthWrap2 .depth2 li {
   height: 0;
+  margin-left: 15px;
   overflow: hidden;
   transition: all 0.5s;
+}
+.hbgMenu .nav .hbgGnb .depthWrap2 .depth2 li:hover a {
+  color: rgba(89, 30, 85, 0.7960784314);
+}
+.hbgMenu .nav .hbgGnb .depthWrap2 .depth2 li a {
+  color: #777;
 }
 .hbgMenu .nav .hbgGnb .depthWrap2 .depth2.on li {
   height: 40px;
@@ -101,6 +138,20 @@
   width: 150px;
   margin: 0 auto;
   line-height: 40px;
+  padding-right: 60px;
+  padding-left: 10px;
+  transition: all 0.5s;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.hbgMenu .nav .hbgGnb .depthWrap:hover {
+  background-color: rgba(184, 142, 182, 0.2117647059);
+}
+.hbgMenu .nav .hbgGnb .depthWrap > a {
+  color: #555;
+}
+.hbgMenu .nav .hbgGnb .depthWrap > a i {
+  margin-right: 10px;
 }
 .hbgMenu .hbgFoot {
   position: absolute;

@@ -173,6 +173,13 @@
                     width: 100%;
                     height: 400px;
                 }
+                .noimg{
+                    width: 100%;
+                    height: 400px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
             }
             .list_info{
                 padding: 20px;
@@ -189,6 +196,282 @@
                 .price{
                     color: #591e55cb;
                 }
+            }
+        }
+    }
+    //상세페이지
+    .detail_center{
+        background-color: #b88eb633;
+        padding-bottom: 15px;
+        .detailWrap{
+            display: flex;
+            .imgWrap{
+                width: 38%;
+                height: 500px;
+                background-color: #fff;
+                margin: 1%;
+                display: flex;
+                justify-content: center;
+                border-radius: 15px;
+                img{
+                    width: 95%;
+                    padding: 20px;
+                }
+            }
+            .noimg{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .detail_info{
+                width: 60%;
+                background-color: #fff;
+                margin: 1%;
+                border-radius: 15px;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                h3{
+                    color: #591e55cb;
+                    margin-bottom: 20px;
+                    font-size: 20px;
+                }
+                .detail_icon{
+                    display: flex;
+                    li{
+                        color: #777;
+                        &:first-child{
+                            margin-left: unset;
+                        }
+                        margin-left: 15px;
+                        i{
+                            margin-right: 5px;
+                        }
+                    }
+                }
+                .context{
+                    padding: 10px 0;
+                    height: 200px;
+                    margin: 20px 0 0;
+                    border-top: 1px solid #b88eb633;
+                    border-bottom: 1px solid #b88eb633;
+                }
+                .detail_icon2{
+                    display: flex;
+                    padding: 10px 0;
+                    align-items: center;
+                    border-bottom: 1px solid #b88eb633;
+                    .icfir{
+                        margin-right: 50px;
+                        color: #777;
+                    }
+                    .ic{
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 50%;
+                        background-color: #fff;
+                        border: 1px solid #b88eb633;
+                        line-height: 30px;
+                        text-align: center;
+                        cursor: pointer;
+                        color: #777;
+                        margin: 0 15px;
+                        transition: all 0.5s;
+                        &:hover{
+                            background-color: #591e55cb;
+                            color: #fff;
+                        }
+                    }
+                }
+                .btnWrap{
+                    margin-top: 30px;
+                    display: flex;
+                    .listpoint{
+                        display: block;
+                        text-align: center;
+                        line-height: 30px;
+                        margin-right: 15px;
+                        width: 80px;
+                        height: 30px;
+                        border: 1px solid #b88eb633;
+                        color: #777;
+                        transition: all 0.5s;
+                        &:hover{
+                            background-color: #591e55cb;
+                            color: #fff;
+                        }
+                    }
+                    .delete{
+                        &:hover{
+                            background-color: red;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+        .commentWrap{
+            background-color: #fff;
+            margin: 1%;
+            width: 98%;
+            border-radius: 15px;
+            h3{
+                margin-left: 30px;
+                padding-top: 25px;
+                color: #591e55cb;
+                font-size: 20px;
+            }
+            .comment_box{
+                padding: 20px;
+                .wrap{
+                    display: flex;
+                    margin: 15px 0;
+                    .comment_icon{
+                        img{
+                            width: 60px;
+                            height: 60px;
+                            border-radius: 50%;
+                            margin-right: 20px;
+                        }
+                    }
+                    .comment_output{
+                        .comment_date{
+                            color: #bbb;
+                            margin: 15px 0;
+                        }
+                        .comment_context{
+                            color: #999;
+                            margin-bottom: 10px;
+                        }
+                    }
+                }
+                .comment_btn{
+                    display: flex;
+                    a{
+                        display: block;
+                        font-size: 13px;
+                        width: 60px;
+                        line-height: 30px;
+                        text-align: center;
+                        height: 30px;
+                        border: 1px solid #b88eb633;
+                        color: #777;
+                        margin-right: 10px;
+                        margin-bottom: 10px;
+                        transition: all 0.5s;
+                        &:hover{
+                            background-color: #591e55cb;
+                            color: #fff;
+                        }
+                    }
+                    .del_comment{
+                        border: 1px solid #b88eb633;
+                        color: #777;
+                        &:hover{
+                            background-color: red;
+                            color: #fff;
+                        }
+                    }
+                }
+                .comupdate_form{
+                    display: none;
+                    .comContext{
+                        width: 80%;
+                        border: none;
+                        padding: 5px;
+                        border: 1px solid #b88eb633;
+                        color: #777;
+                        resize: none;
+                        outline: none;
+                    }
+                    .btnWrap{
+                        display: flex;
+                        margin-left: 20px;
+                        margin-top: 10px;
+                        button{
+                            display: block;
+                            font-size: 13px;
+                            width: 60px;
+                            line-height: 30px;
+                            text-align: center;
+                            height: 30px;
+                            border: 1px solid #b88eb633;
+                            background-color: #fff;
+                            color: #777;
+                            margin-right: 10px;
+                            margin-bottom: 10px;
+                            cursor: pointer;
+                            transition: all 0.5s;
+                            &:hover{
+                                background-color: #591e55cb;
+                                color: #fff;
+                            }
+                        }
+                        .comment_no{
+                            border: 1px solid #b88eb633;
+                            color: #777;
+                        }
+                    }
+                }
+            }
+            .comment{
+                padding: 30px;
+                h3{
+                    margin-left: unset;
+
+                    margin-bottom: 30px;
+                }
+                #comment_form{
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 20px;
+                    textarea{
+                        width: 80%;
+                        border: none;
+                        outline: none;
+                        border-bottom: 1px solid #b88eb633;
+                        resize: none;
+                    }
+                    button{
+                        display: block;
+                        font-size: 13px;
+                        width: 60px;
+                        line-height: 30px;
+                        text-align: center;
+                        height: 30px;
+                        border: 1px solid #b88eb633;
+                        background-color: #fff;
+                        color: #777;
+                        cursor: pointer;
+                        transition: all 0.5s;
+                        &:hover{
+                            background-color: #591e55cb;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    //페이징
+    .paging{
+        background-color: #b88eb633;
+        display: flex;
+        justify-content: center;
+        padding-bottom: 30px;
+        li{
+            line-height: 40px;
+            margin: 0 15px;
+            color: #777;
+            a{
+                color: #777;
+            }
+        }
+        .highlight{
+            text-decoration: underline;
+            a{
+                color: #591e559c;
             }
         }
     }
