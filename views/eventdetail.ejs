@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항 상세 페이지</title>
+    <%- include("common/link.ejs") %>
+</head>
+<body>
+    <%- include("common/header.ejs") %>
+    <%- include("common/hbgmenu.ejs") %>
+    <div id="container">
+        <div class="boxhd">
+            <h2>이벤트</h2>
+            <p class="path">이벤트 / 상세페이지</p>
+        </div>
+        <div class="newsWrapdetail">
+            <div class="center">
+                <div>
+                    <div><img src="/upload/<%-eventData.thumbnail%>"></div>
+                    <h3><%-eventData.name%></h3>
+                    <p><%-eventData.conext%></p>
+                    <div class="middelposition">
+                        <span><%-eventData.time%></span>
+                    </div>
+                </div>
+                <a href="/event"><i class="fa-solid fa-arrow-left"></i>목록으로</a>
+            </div>
+        </div>
+    </div>
+    <%- include("common/footer.ejs") %>
+    <script src="/js/lefttap.js"></script>
+    <script src="/js/tapmenu.js"></script>
+</body>
+</html>

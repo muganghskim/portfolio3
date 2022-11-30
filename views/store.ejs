@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>매장 검색</title>
+    <%- include("common/link.ejs") %>
+</head>
+<body>
+    <%- include("common/header.ejs") %>
+    <%- include("common/hbgmenu.ejs") %>
+    <div id="container">
+        <div class="boxhd">
+            <h2>지역마켓</h2>
+            <p class="path">지역마켓</p>
+        </div>
+        <div class="storeWrap">
+            <div class="center">
+                <div class="left">
+                    <div class="searchWrap">
+                        <div class="left_searchMap">
+                            <!-- 지역으로 된 태그 생성은 셀프-->
+                            
+                        </div>
+                        <div class="right_search">
+                            <!-- 사용자가 매장 검색 하는 구간(지역으로 검색) -->
+                            <form id="local" action="/store/search/local" method="get">
+                                <div>
+                                    <h3>01 지역으로 검색</h3>
+                                    <!-- 시/도 선택 -->
+                                    <select class="city1" name="city1">
+                                        <option value>시/도 선택</option>
+                                    </select>
+                                    <!-- 구/군 선택 -->
+                                    <select class="city2" name="city2">
+                                        <option value>구/군 선택</option>
+                                    </select>
+                                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </div>
+                            </form>
+                            <!-- 사용자가 매장 검색 하는 구간(매장명으로 검색) -->
+                            <form class="searchForm" action="/store/search/storename" method="get">
+                                <div>
+                                    <h3>02 제목으로 검색</h3>
+                                    <input class="namesearch" type="text" name="name">
+                                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- 검색 시 검색 결과 없는 경우 -->
+            <% if(storeData.length === 0){ %>
+                <h3 class="nostore">해당하는 전시관이 없습니다.</h3>
+            <% } %>
+                </div>
+                <!-- 처음 들어왔을 때 모든 매장 리스트 보여줌 -->
+                <div class="right">
+                    <h3 class="store_s_title">지역마켓 안내</h3>
+                    <div class="storelistheader">
+                        <div class="line">
+                            <div class="fir">제목</div>
+                        </div>
+                        <div class="line">
+                            <div class="sec">위치</div>
+                        </div>
+                        <div class="line">
+                            <div class="thr">상세주소</div>
+                        </div>
+                        <div class="line">
+                            <div class="for">전화번호</div>
+                        </div>
+                    </div>
+                    <% for(let i = 0; i < storeData.length; i++){%>
+                        <div class="storelist">
+                            <div class="line">
+                                <div><%-storeData[i].name %></div>
+                            </div>
+                            <div class="line">
+                                <div><%- storeData[i].sido + storeData[i].sigugun %></div>
+                            </div>
+                            <div class="line">
+                                <div class="adressData" data-adressData="<%-storeData[i].adress%>"><%-storeData[i].adress %></div>
+                            </div>
+                            <div class="line">
+                                <div><%-storeData[i].phone %></div>
+                            </div>
+                        </div>
+                        <input id="searchResult" type="hidden" value="<%- storeData[i].sido %>">
+                    <% } %>
+                    <!-- 페이징 번호 생성된 구간 -->
+                    <% if(pageNumber != "nopage"){ %>
+                        <ul class="paging store">
+                            <% if(pageNumber <= 1){ %>
+                                <li>처음</li>
+                            <% } else { %>
+                                <li><a href="?page=1">처음</a></li>
+                            <% } %>
+                            <% if(blockStart > totalBlock){ %>
+                                <li><a href="?page=<%- blockStart - 1 %>">이전</a></li>
+                            <% } %>
+                            <% for(let i = blockStart; i <= blockEnd; i++){ %>
+                                <% if(pageNumber == i){ %>
+                                <li class="highlight"><a href="?page=<%- i %>"><%- i %></a></li>
+                                <% } else { %>
+                                <li><a href="?page=<%- i %>"><%- i %></a></li>
+                                <% } %>
+                            <% } %>
+                            <% if(blockNum < totalBlock){ %>
+                                <li><a href="?page=<%- blockEnd + 1 %>">다음</a></li>
+                            <% } %>
+                            <% if(pageNumber >= paging){ %>
+                                <li>마지막</li>
+                            <% } else { %>
+                                <li><a href="?page=<%- paging %>">마지막</a></li>
+                            <% } %>
+                        </ul>
+                    <% } %>
+                </div>
+            </div>
+            <div class="mapWrap">
+                <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    <%- include("common/footer.ejs") %>
+    <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c06035a2f820bda07bd0f6923310edbb&libraries=services,clusterer,drawing"></script> -->
+    <script src="/js/hangjungdong.js"></script>
+    <script src="/js/storeselect.js"></script>
+    <script src="/js/lefttap.js"></script>
+    <script>
+        const storelist = document.querySelectorAll(".adressData");
+        let point ="";
+        storelist.forEach(function(item,index){
+            item.addEventListener("click",function(){
+                point = item.getAttribute("data-adressData");
+                mapgener(point);
+            });
+        });
+        
+        // mapgener();
+
+        function mapgener(para){
+            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+            mapOption = {
+                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };  
+
+            // 지도를 생성합니다    
+            var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+            // 주소-좌표 변환 객체를 생성합니다
+            var geocoder = new kakao.maps.services.Geocoder();
+
+            // 주소로 좌표를 검색합니다
+            geocoder.addressSearch(para, function(result, status) {
+
+                // 정상적으로 검색이 완료됐으면 
+                if (status === kakao.maps.services.Status.OK) {
+
+                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                    // 결과값으로 받은 위치를 마커로 표시합니다
+                    var marker = new kakao.maps.Marker({
+                        map: map,
+                        position: coords
+                    });
+
+                    // 인포윈도우로 장소에 대한 설명을 표시합니다
+                    var infowindow = new kakao.maps.InfoWindow({
+                        content: '<div style="width:150px;text-align:center;padding:6px 0;">지역마켓</div>'
+                    });
+                    infowindow.open(map, marker);
+
+                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                    map.setCenter(coords);
+                } 
+            });
+        }
+        
+    </script>
+</body>
+</html>

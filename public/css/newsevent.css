@@ -1,3 +1,100 @@
+#container .storeWrap {
+  background-color: rgba(184, 142, 182, 0.2);
+  padding-bottom: 2%;
+}
+#container .storeWrap .center {
+  display: flex;
+}
+#container .storeWrap .center .left {
+  width: 38%;
+  height: 500px;
+  background-color: #fff;
+  margin: 1%;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#container .storeWrap .center .left #local > div {
+  margin-bottom: 15px;
+}
+#container .storeWrap .center .left #local > div h3 {
+  color: rgba(89, 30, 85, 0.7450980392);
+  margin-bottom: 15px;
+}
+#container .storeWrap .center .left #local > div select {
+  width: 120px;
+  height: 30px;
+  margin-right: 10px;
+  border: 1px solid rgba(89, 30, 85, 0.3882352941);
+}
+#container .storeWrap .center .left #local > div button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(89, 30, 85, 0.3882352941);
+  cursor: pointer;
+}
+#container .storeWrap .center .left .searchForm > div h3 {
+  color: rgba(89, 30, 85, 0.7450980392);
+  margin-bottom: 15px;
+}
+#container .storeWrap .center .left .searchForm > div input {
+  width: 250px;
+  height: 30px;
+  margin-right: 10px;
+  border: 1px solid rgba(89, 30, 85, 0.3882352941);
+}
+#container .storeWrap .center .left .searchForm > div button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(89, 30, 85, 0.3882352941);
+  cursor: pointer;
+}
+#container .storeWrap .center .right {
+  width: 60%;
+  background-color: #fff;
+  margin: 1%;
+  border-radius: 15px;
+  padding: 20px;
+}
+#container .storeWrap .center .right h3 {
+  color: rgba(89, 30, 85, 0.7450980392);
+}
+#container .storeWrap .center .right .storelistheader {
+  margin-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(89, 30, 85, 0.3882352941);
+  color: rgba(89, 30, 85, 0.631372549);
+  display: flex;
+  justify-content: space-between;
+}
+#container .storeWrap .center .right .storelistheader .line {
+  width: 25%;
+  text-align: center;
+}
+#container .storeWrap .center .right .storelist {
+  display: flex;
+  justify-content: space-between;
+}
+#container .storeWrap .center .right .storelist .line {
+  padding: 15px 0;
+  width: 25%;
+  text-align: center;
+  color: #777;
+  border-bottom: 1px solid rgba(184, 142, 182, 0.2);
+}
+#container .storeWrap .center .right .storelist .line .adressData:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+#container .storeWrap .mapWrap {
+  background-color: #fff;
+  margin: 1%;
+  width: 98%;
+  border-radius: 15px;
+  height: 400px;
+}
 #container .newsWrap {
   background-color: rgba(184, 142, 182, 0.2);
   padding-bottom: 2%;
@@ -80,29 +177,77 @@
   margin-top: 100px;
 }
 #container .newsWrap .center .brdWrap .brdlist {
-  width: 23%;
-  padding: 1%;
+  width: 20.5%;
+  margin: 1%;
+  height: 390px;
+  padding: 0 1%;
+  border: 1px solid rgba(184, 142, 182, 0.5019607843);
+  border-radius: 5px;
 }
 #container .newsWrap .center .brdWrap .brdlist > .adlist {
   padding: 10px;
-  display: block;
-  border: 1px solid rgba(184, 142, 182, 0.5019607843);
-  border-radius: 5px;
-  height: 350px;
 }
 #container .newsWrap .center .brdWrap .brdlist > .adlist > div {
   width: 100%;
 }
 #container .newsWrap .center .brdWrap .brdlist > .adlist > div img {
   width: 100%;
+  height: 250px;
 }
 #container .newsWrap .center .brdWrap .brdlist > .adlist h3 {
-  padding-top: 15px;
-  padding-bottom: 20px;
+  padding-top: 12px;
+  padding-bottom: 13px;
   color: rgba(89, 30, 85, 0.7960784314);
 }
 #container .newsWrap .center .brdWrap .brdlist > .adlist p {
   font-size: 13px;
+  height: 50px;
   line-height: 1.7;
   color: rgba(184, 142, 182, 0.7803921569);
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#container .newsWrapdetail {
+  background-color: rgba(184, 142, 182, 0.2);
+  padding-bottom: 2%;
+}
+#container .newsWrapdetail .center {
+  width: 60%;
+  margin: 0 2.5%;
+  height: 1100px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.1);
+}
+#container .newsWrapdetail .center > div {
+  padding: 30px;
+  position: relative;
+}
+#container .newsWrapdetail .center > div > div img {
+  width: 740px;
+}
+#container .newsWrapdetail .center > div h3 {
+  padding-top: 15px;
+  padding-bottom: 20px;
+  color: rgba(89, 30, 85, 0.7960784314);
+}
+#container .newsWrapdetail .center > div p {
+  white-space: pre-wrap;
+  line-height: 1.3;
+}
+#container .newsWrapdetail .center > div .topposition {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+#container .newsWrapdetail .center > div .middelposition {
+  margin-top: 20px;
+}
+#container .newsWrapdetail .center a {
+  color: #777;
+  padding: 30px;
+}
+#container .newsWrapdetail .center a i {
+  margin-right: 5px;
 }

@@ -11,6 +11,14 @@
 #header .hbgBtn.on {
   margin-left: 0;
 }
+#header .hbgBtn.on .top {
+  width: 15px;
+  transform: translate(15px, 1px) rotateZ(45deg);
+}
+#header .hbgBtn.on .bot {
+  width: 15px;
+  transform: translate(15px, -1px) rotateZ(-45deg);
+}
 #header .hbgBtn span {
   display: block;
   width: 30px;
@@ -50,8 +58,8 @@
 }
 #header .joinWrap > a {
   display: block;
-  width: 80px;
-  margin: 0 0px;
+  text-align: center;
+  width: 120px;
   color: #777;
   line-height: 60px;
 }

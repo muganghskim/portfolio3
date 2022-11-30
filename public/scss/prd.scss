@@ -93,7 +93,7 @@
             li{
                 margin-top: 50px;
                 margin-bottom: 30px;
-                width: 80px;
+                width: 120px;
                 line-height: 40px;
                 text-align: center;
                 background-color: #b88eb633;
@@ -474,5 +474,8 @@
                 color: #591e559c;
             }
         }
+    }
+    .paging.store{
+        background-color: #fff;
     }
 }

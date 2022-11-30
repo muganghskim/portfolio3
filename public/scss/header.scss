@@ -8,6 +8,14 @@
         margin-left: 280px;
         &.on{
             margin-left: 0;
+            .top{
+                width: 15px;
+                transform: translate(15px,1px) rotateZ(45deg);
+            }
+            .bot{
+                width: 15px;
+                transform: translate(15px,-1px) rotateZ(-45deg);
+            }
         }
         span{
             display: block;
@@ -48,8 +56,8 @@
         margin-right: 25px;
         >a{
             display: block;
-            width: 80px;
-            margin: 0 0px;
+            text-align: center;
+            width: 120px;
             color: #777;
             line-height: 60px;
             i{

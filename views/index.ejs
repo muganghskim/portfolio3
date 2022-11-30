@@ -13,7 +13,7 @@
         <div id="container">
             <div class="boxhd">
                 <h2>대시보드</h2>
-                <p class="path">path</p>
+                <p class="path">대시보드</p>
             </div>
             <div class="boxWrap">
                 <div class="introbox">
@@ -24,7 +24,7 @@
                         <h3>안녕하세요, <%-userData.joinnick%>님</h3>
                       <% } %>
                         <p>돌아오신것을 환영합니다!</p>
-                        <a href="#">지금 시작 →</a>
+                        <a href="/prdlist">지금 시작 →</a>
                     </div>
                     <div class="right-img"><img src="/img/Humaaanss.png"></div>
                 </div>
@@ -93,7 +93,7 @@
                       <div class="line">
                         <div class="imgWrap"><img src="/upload/<%-adData[i].thumbnail%>"></div>
                         <div class="info">
-                          <h4><%-adData[i].name%></h4>
+                          <h4><a href="/eventdetail/<%-adData[i].num%>"><%-adData[i].name%></a></h4>
                           <p><%-adData[i].conext%></p>
                         </div>
                         <p class="time"><%-adData[i].time%></p>
@@ -121,7 +121,7 @@
                               <% } else { %>
                               <div class="imgWrap"><img src="/upload/<%-prdData[i].prdfile%>"></div>
                               <% } %>
-                              <p class="text"><%-prdData[i].prdsubject%></p>
+                              <p class="text"><a href="/prddetail/<%-prdData[i].prdid%>"><%-prdData[i].prdsubject%></a></p>
                               <p><%-prdData[i].prdlocal2%></p>
                               <p>가격 : <%-prdData[i].prdprice%></p>
                               <input class="prdoption" type="hidden" value="<%-prdData[i].prdoption%>">
@@ -142,7 +142,7 @@
                     <div class="line">
                       <p><%-newsData[i].time%></p>
                       <p><%-newsData[i].newsoption%></p>
-                      <p><%-newsData[i].name%></p>
+                      <p><a href="/newsdetail/<%-newsData[i].num%>"><%-newsData[i].name%></a></p>
                     </div>
                   <% } %>
                 </div>
@@ -177,7 +177,7 @@
                       <% if(maxCount){ %>
                       <div class="imgWrap"><img src="/upload/<%-maxCount.prdfile%>"></div>
                       <div class="info-text">
-                        <p class="text"><%-maxCount.prdsubject%></p>
+                        <p class="text"><a href="/prddetail/<%-maxCount.prdid%>"><%-maxCount.prdsubject%></a></p>
                         <p><%-maxCount.prdlocal2%></p>
                         <p class="price">가격 : <%-maxCount.prdprice%></p>
                         <span class="pricedis"><%-maxCount.prdprice * 3 / 10%></span>

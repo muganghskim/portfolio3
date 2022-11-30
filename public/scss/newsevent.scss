@@ -1,4 +1,107 @@
 #container{
+    .storeWrap{
+        background-color: #b88eb633;
+        padding-bottom: 2%;
+        .center{
+            display: flex;
+            .left{
+                width: 38%;
+                height: 500px;
+                background-color: #fff;
+                margin: 1%;
+                border-radius: 15px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                #local{
+                    > div{
+                        h3{
+                            color: #591e55be;
+                            margin-bottom: 15px;
+                        }
+                        select{
+                            width: 120px;
+                            height: 30px;
+                            margin-right: 10px;
+                            border: 1px solid #591e5563;
+                        }
+                        button{
+                            width: 30px;
+                            height: 30px;
+                            border: 1px solid #591e5563;
+                            cursor: pointer;
+                        }
+                        margin-bottom: 15px;
+                    }
+                }
+                .searchForm{
+                    > div{
+                        h3{
+                            color: #591e55be;
+                            margin-bottom: 15px;
+                        }
+                        input{
+                            width: 250px;
+                            height: 30px;
+                            margin-right: 10px;
+                            border: 1px solid #591e5563;
+                        }
+                        button{
+                            width: 30px;
+                            height: 30px;
+                            border: 1px solid #591e5563;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+            .right{
+                width: 60%;
+                background-color: #fff;
+                margin: 1%;
+                border-radius: 15px;
+                padding: 20px;
+                h3{
+                    color: #591e55be;
+                }
+                .storelistheader{
+                    margin-top: 20px;
+                    padding-bottom: 20px;
+                    margin-bottom: 10px;
+                    border-bottom: 1px solid #591e5563;
+                    color: #591e55a1;
+                    display: flex;
+                    justify-content: space-between;
+                    .line{
+                        width: 25%;
+                        text-align: center;
+                    }
+                }
+                .storelist{
+                    display: flex;
+                    justify-content: space-between;
+                    .line{
+                        padding: 15px 0;
+                        width: 25%;
+                        text-align: center;
+                        color: #777;
+                        border-bottom: 1px solid #b88eb633;
+                        .adressData:hover{
+                            text-decoration: underline;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+        .mapWrap{
+            background-color: #fff;
+            margin: 1%;
+            width: 98%;
+            border-radius: 15px;
+            height: 400px;
+        }
+    }
     .newsWrap{
         background-color: #b88eb633;
         padding-bottom: 2%;
@@ -81,32 +184,84 @@
                 flex-wrap: wrap;
                 margin-top: 100px;
                 .brdlist{
-                    width: 23%;
-                    padding: 1%;
+                    width: 20.5%;
+                    margin: 1%;
+                    height: 390px;
+                    padding: 0 1%;
+                    border: 1px solid #b88eb680;
+                    border-radius: 5px;
                     >.adlist{
                         padding: 10px;
-                        display: block;
-                        border: 1px solid #b88eb680;
-                        border-radius: 5px;
-                        height: 350px;
                         >div{
                             width: 100%;
                             img{
                                 width: 100%;
+                                height: 250px;
                             }
                         }
                         h3{
-                            padding-top: 15px;
-                            padding-bottom: 20px;
+                            padding-top: 12px;
+                            padding-bottom: 13px;
                             color: #591e55cb;
                         }
                         p{
                           font-size: 13px;
+                          height: 50px;
                           line-height: 1.7;
                           color: #b88eb6c7;
+                          white-space: pre;
+                          overflow: hidden;
+                          text-overflow: ellipsis;
                         }
                     }
                 }
+            }
+        }
+    }
+    //공지사항 상세
+    .newsWrapdetail{
+        background-color: #b88eb633;
+        padding-bottom: 2%;
+        .center{
+            width: 60%;
+            margin: 0 2.5%;
+            height: 1100px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.1);
+            > div{
+                padding: 30px;
+                position: relative;
+                > div{
+                    img{
+                      width: 740px;
+                    }
+                }
+                h3{
+                    padding-top: 15px;
+                    padding-bottom: 20px;
+                    color: #591e55cb;
+                }
+                p{
+                    white-space: pre-wrap;
+                    line-height: 1.3;
+                }
+                .topposition{
+                    position: absolute;
+                    top: 30px;
+                    right: 30px;
+                }
+                .middelposition{
+                    margin-top: 20px;
+                }
+            }
+            a{ 
+            
+                i{
+                    margin-right: 5px;
+                }
+                color: #777;
+                padding: 30px;
             }
         }
     }

@@ -68,6 +68,34 @@ app.get("/",function(req,res){
   });
 });
 
+//메인 검색시
+app.get("/prdlist/search/prdname",function(req,res){
+  let pageNumber = "nopage";
+  // query : <-- store.ejs 파일에서 input name 값
+  // path: <-- db storelist 콜렉션에서 name 
+  let prdSearch = [
+    {
+      $search: {
+        index: 'product_search',
+        text: {
+          query: req.query.name,
+          path: "prdsubject"
+        }
+      }
+    }
+  ]
+  //검색어 입력시
+  if(req.query.name !== ""){
+    db.collection("prdlist").aggregate(prdSearch).toArray(function(err,result){
+      res.render("prdlist",{prdData:result,pageNumber:pageNumber,userData:req.user});
+    });
+  }
+  //검색어 미입력시
+  else{
+    res.redirect("/prdlist");
+  }
+});
+
 //관리자 로그인 페이지
 app.get("/admin",function(req,res){
     res.render("admin_login");
@@ -99,7 +127,7 @@ app.get("/admin/adlist",function(req,res){
 app.get("/admin/storelist",function(req,res){
     //db에 저장되어 있는 상품목록들 find로 찾아 와서 전송
     db.collection("storelist").find({}).toArray(function(err,result){
-      res.render("admin_storelist",{storeData:result,userData:req.user});
+      res.render("admin_store",{storeData:result,userData:req.user});
     });
 });
   
@@ -170,6 +198,94 @@ app.get("/admin/storelist",function(req,res){
       });
     });
   });
+
+//매장 검색 페이지(사용자)
+app.get("/store",async function(req,res){
+  //사용자가 게시판에 접속 시 몇번 페이징 번호로 접속했는지 체크
+  let pageNumber = (req.query.page == null) ? 1 : Number(req.query.page);
+  // 한 페이지당 보여줄 데이터 갯수
+  let perPage = 6;
+  // 한 블록당 보여줄 페이징 번호 갯수
+  let blockCount = 3;
+  // 현재 페이지 블록 구하기 
+  let blockNum = Math.ceil(pageNumber / blockCount);
+  //블록안에 있는 페이징의 시작번호값 알아내기
+  let blockStart = ((blockNum - 1) * blockCount) + 1;
+  //블록안에 있는 페이징의 끝번호값 알아내기
+  let blockEnd = blockStart + blockCount - 1;
+  //데이터 베이스 콜렉션에 있는 전체 객체의 갯수값 가져오는 명령어
+  let totalData = await db.collection("storelist").countDocuments({});
+  //전체 데이터 값을 통해서 몇개의 페이징 번호가 만들어져야 하는지
+  let paging = Math.ceil(totalData / perPage);
+  //만약 블록안에있는 페이징의 끝 번호값이 전체 페이징 갯수보다 많다면 강제로 마지막 페이징 번호값으로 변경
+  if(blockEnd > paging){
+      blockEnd = paging;
+  }
+  //블록의 총 갯수
+  let totalBlock = Math.ceil(paging / blockCount);
+  //데이터베이스에 실제 값을 꺼내기 위해 몇개씩 꺼내올건지 설정 sort / skip / limit
+  let startFrom = (pageNumber - 1) * perPage
+  db.collection("storelist").find({}).skip(startFrom).limit(perPage).toArray(function(err,result){
+    res.render("store",{storeData:result,
+                        paging:paging,
+                        pageNumber:pageNumber,
+                        blockStart:blockStart,
+                        blockEnd:blockEnd,
+                        blockNum:blockNum,
+                        totalBlock:totalBlock,
+                        userData:req.user
+    });
+  });
+});
+
+//주소로 검색시(사용자)
+app.get("/store/search/local",function(req,res){
+  // 시 / 도 선택시
+  let pageNumber = "nopage";
+  if(req.query.city1 !== "" && req.query.city2 === ""){
+    db.collection("storelist").find({sido:req.query.city1}).toArray(function(err,result){
+      res.render("store",{storeData:result,pageNumber:pageNumber,userData:req.user});
+    });
+  }
+  // 시/도 구/군 선택시
+  else if(req.query.city1 !== "" && req.query.city2 !== ""){
+    db.collection("storelist").find({sido:req.query.city1,sigugun:req.query.city2}).toArray(function(err,result){
+      res.render("store",{storeData:result,pageNumber:pageNumber,userData:req.user});
+    });
+  }
+  // 아무것도 선택하지 않았을 때
+  else{
+    res.redirect("/store");
+  }
+});
+
+//매장명으로 검색시 (사용자)
+app.get("/store/search/storename",function(req,res){
+  let pageNumber = "nopage";
+  // query : <-- store.ejs 파일에서 input name 값
+  // path: <-- db storelist 콜렉션에서 name 
+  let storeSearch = [
+    {
+      $search: {
+        index: 'store_search',
+        text: {
+          query: req.query.name,
+          path: "name"
+        }
+      }
+    }
+  ]
+  //검색어 입력시
+  if(req.query.name !== ""){
+    db.collection("storelist").aggregate(storeSearch).toArray(function(err,result){
+      res.render("store",{storeData:result,pageNumber:pageNumber,userData:req.user});
+    });
+  }
+  //검색어 미입력시
+  else{
+    res.redirect("/store");
+  }
+});
 
 
   //공지사항 (사용자) 화면 경로
@@ -434,6 +550,8 @@ app.post("/update",upload.single('uptfile'),function(req,res){
         $set:{
             prdsubject:req.body.subject,
             prdcontext:req.body.context,
+            prdoption:req.body.prdoption,
+            prdprice:req.body.price,
             prdfile:fileUpload     
         }
     },function(err,result){
@@ -460,6 +578,24 @@ app.get("/prddetail/:no",function(req,res){
             res.render("prddetail",{prdData:result1,userData:req.user,commentData:result2});
         });
     });
+  });
+});
+
+//뉴스 상세화면 get 요청  /:변수명  작명가능
+//db안에 해당 게시글번호에 맞는 데이터만 꺼내오고 ejs파일로 응답
+app.get("/newsdetail/:no",function(req,res){
+    db.collection("brdlist").findOne({num:Number(req.params.no)},function(err,result1){
+      //사용자에게 응답 ->게시글에 관련된 데이터 / 로그인 유저정보 / 댓글에 관련된 데이터
+      res.render("newsdetail",{newsData:result1,userData:req.user});
+    });
+});
+
+//이벤트 상세화면 get 요청  /:변수명  작명가능
+//db안에 해당 게시글번호에 맞는 데이터만 꺼내오고 ejs파일로 응답
+app.get("/eventdetail/:no",function(req,res){
+  db.collection("adlist").findOne({num:Number(req.params.no)},function(err,result1){
+    //사용자에게 응답 ->게시글에 관련된 데이터 / 로그인 유저정보 / 댓글에 관련된 데이터
+    res.render("eventdetail",{eventData:result1,userData:req.user});
   });
 });
 
