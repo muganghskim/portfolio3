@@ -128,7 +128,7 @@
     
     
     <%- include("common/footer.ejs") %>
-    <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c06035a2f820bda07bd0f6923310edbb&libraries=services,clusterer,drawing"></script> -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c06035a2f820bda07bd0f6923310edbb&libraries=services,clusterer,drawing"></script>
     <script src="/js/hangjungdong.js"></script>
     <script src="/js/storeselect.js"></script>
     <script src="/js/lefttap.js"></script>
@@ -141,8 +141,8 @@
                 mapgener(point);
             });
         });
-        
-        // mapgener();
+        let firpoint = storelist[0].getAttribute("data-adressData");
+        mapgener(firpoint);
 
         function mapgener(para){
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
