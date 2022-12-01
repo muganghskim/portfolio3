@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인</title>
+    <%- include("common/link.ejs") %>
+</head>
+<body>
+    <%- include("common/header.ejs") %>
+    <%- include("common/hbgmenu.ejs") %>
+        <div id="container">
+            <div class="boxhd">
+                <h2>대시보드</h2>
+                <p class="path">대시보드</p>
+            </div>
+            <div class="boxWrap">
+                <div class="introbox">
+                    <div class="left-info">
+                      <% if(!userData){ %>
+                        <h3>안녕하세요, 홍길동님</h3>
+                      <% } else { %>
+                        <h3>안녕하세요, <%-userData.joinnick%>님</h3>
+                      <% } %>
+                        <p>돌아오신것을 환영합니다!</p>
+                        <a href="/prdlist">지금 시작 →</a>
+                    </div>
+                    <div class="right-img"><img src="/img/Humaaanss.png"></div>
+                </div>
+                <div class="earningbox">
+                  <% if(userData) { %>
+                    <% for(let i=0; i < 5; i++){ %>
+                      <% if(prdData[i]){ %>
+                        <input class="prdviews" type="hidden" value="<%-prdData[i].prdviews%>">
+                        <input class="viewsname" type="hidden" value="<%-prdData[i].prdsubject%>">
+                      <% } %>
+                    <% } %>
+                  <% } else { %>
+                    <% for(let i=0; i < 5; i++){ %>
+                      <input class="prdviews" type="hidden" value="<%-0%>">
+                      <input class="viewsname" type="hidden" value="최근데이터<%-i+1%>">
+                      <% } %>
+                  <% } %>
+                    <div>
+                        <canvas id="myChart2"></canvas>
+                    </div>
+                </div>
+                <div class="chart1box">
+                  <div class="chart2Data">
+                    <% if(userData) {%>
+                      <% 
+                        let count = {
+                            category1:0,
+                            category2:0,
+                            category3:0,
+                            category4:0,
+                            category5:0,
+                            category6:0,
+                            category7:0
+                        };
+                      %>
+                      <% for(let i=0; i<prdData.length; i++){%>
+                          <% if(prdData[i].prdoption == "생활가전" ){ count.category1 += 1 %>
+                          
+                          <% } if(prdData[i].prdoption == "의류"){count.category2 += 1 %>
+                          
+                          <% } if(prdData[i].prdoption == "스포츠"){count.category3 += 1 %>
+                          
+                          <% } if(prdData[i].prdoption == "취미"){count.category4 += 1 %>
+                        
+                          <% } if(prdData[i].prdoption == "도서"){count.category5 += 1 %>
+          
+                          <% } if(prdData[i].prdoption == "식품"){count.category6 += 1 %>
+          
+                          <% } if(prdData[i].prdoption == "기타중고"){count.category7 += 1 %>
+          
+                          <% } %>
+                      <% } %>
+          
+                      <% Object.keys(count).forEach((item,index)=>{ %>
+                        <input type="hidden" class="prdCounting" value="<%- count[item] %>">
+                      <% }) %>
+                    <% } %>
+                  </div>
+                    <div>
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+                <div class="adbox">
+                  <h3>이벤트</h3>
+                  <% for(let i=0; i < 5; i++){ %>
+                      <div class="line">
+                        <div class="imgWrap"><img src="/upload/<%-adData[i].thumbnail%>"></div>
+                        <div class="info">
+                          <h4><a href="/eventdetail/<%-adData[i].num%>"><%-adData[i].name%></a></h4>
+                          <p><%-adData[i].conext%></p>
+                        </div>
+                        <p class="time"><%-adData[i].time%></p>
+                      </div>
+                  <% } %>
+                </div>
+                <div class="prdbox">
+                  <h3>최근 등록한 상품</h3>
+                  <div class="prdWrap">
+                    <% if(!userData){ %>
+                      <div class="nologinprd">- 로그인을 해주세요. -</div>
+                    <% } else { %>
+                      <% for(let i=0; i < 3; i++){ %>
+                        <% if(!prdData[i]){ %>
+                          <div class="prdlist">
+                            <div class="imgWrap noWrap">썸네일 없음</div>
+                            <p class="text notext">데이터가 없습니다.</p>
+                            <p>데이터가 없습니다.</p>
+                            <p>데이터가 없습니다.</p>
+                          </div>
+                        <% } else { %>
+                            <div class="prdlist">
+                              <% if(prdData[i].prdfile == null){ %>
+                              <div class="imgWrap noWrap">썸네일 없음</div>
+                              <% } else { %>
+                              <div class="imgWrap"><img src="/upload/<%-prdData[i].prdfile%>"></div>
+                              <% } %>
+                              <p class="text"><a href="/prddetail/<%-prdData[i].prdid%>"><%-prdData[i].prdsubject%></a></p>
+                              <p><%-prdData[i].prdlocal2%></p>
+                              <p>가격 : <%-prdData[i].prdprice%></p>
+                              <input class="prdoption" type="hidden" value="<%-prdData[i].prdoption%>">
+                            </div>
+                        <% } %>
+                      <% } %>
+                    <% } %>
+                  </div>
+                </div>
+                <div class="newsbox">
+                  <h3>공지사항</h3>
+                  <div class="linehd">
+                    <p>작성일</p>
+                    <p>카테고리</p>
+                    <p>제목</p>
+                  </div>
+                  <% for(let i=0; i < 7; i++){ %>
+                    <div class="line">
+                      <p><%-newsData[i].time%></p>
+                      <p><%-newsData[i].newsoption%></p>
+                      <p><a href="/newsdetail/<%-newsData[i].num%>"><%-newsData[i].name%></a></p>
+                    </div>
+                  <% } %>
+                </div>
+                <div class="chart2box">
+                  <div class="left-count">
+                    <p class="discount">최고 조회수 스페셜 할인 70% OFF <br> 가지마켓에서 할인금액 지원!!</p>
+                    <h3>상품 할인 남은 시간</h3>
+                    <div class="count1">
+                        <div class="time1">
+                            <p class="view">00</p>
+                            <p class="context">Days</p>
+                        </div>
+                        <span>:</span>
+                        <div class="time1">
+                            <p class="view">00</p>
+                            <p class="context">Hours</p>
+                        </div>
+                        <span>:</span>
+                        <div class="time1">
+                            <p class="view">00</p>
+                            <p class="context">Minutes</p>
+                        </div>
+                        <span>:</span>
+                        <div class="time1">
+                            <p class="view">00</p>
+                            <p class="context">Seconds</p>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="right-prd">
+                    <% if(userData) { %>
+                      <% if(maxCount){ %>
+                      <div class="imgWrap"><img src="/upload/<%-maxCount.prdfile%>"></div>
+                      <div class="info-text">
+                        <p class="text"><a href="/prddetail/<%-maxCount.prdid%>"><%-maxCount.prdsubject%></a></p>
+                        <p><%-maxCount.prdlocal2%></p>
+                        <p class="price">가격 : <%-maxCount.prdprice%></p>
+                        <span class="pricedis"><%-maxCount.prdprice * 3 / 10%></span>
+                      </div>
+                      <% } else { %>
+                        <div>- 데이터가 없습니다. -</div>
+                      <% } %>
+                    <% } else { %>
+                      <div>- 데이터가 없습니다. -</div>
+                    <% } %>
+                  </div>
+                </div>
+                <div class="chart3box">
+                  <h3>등록상품 가격 분포</h3>
+                  <% if(userData) { %>
+                    <% for(let i=0; i<prdData.length; i++){ %>
+                      <input class="chart3price" type="hidden" value="<%-prdData[i].prdprice%>">
+                    <% } %>
+                  <% } else { %>
+                    <div class="nologinprd">- 데이터가 없습니다. -</div>
+                  <% } %>
+                  <div>
+                    <canvas id="myChart3"></canvas>
+                  </div>
+                </div>
+                <div class="mybox">
+                  <div class="left">
+                    <h3>프리미엄 접근</h3>
+                    <p>여러분께 20가지 추가 기능과<br>상품 커뮤니티 업데이트 및<br>5가지 추가 스킨을<br>제공합니다.</p>
+                    <a href="#">바로 가기</a>
+                  </div>
+                  <div class="right">
+                    <div class="imgWrap"><img src="/img/Transaction.png"></div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    <%- include("common/footer.ejs") %>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('myChart');
+
+  const countData = document.querySelectorAll(".chart2Data > .prdCounting");
+  let labelData = ["생활가전","의류","스포츠","취미","도서","식품","기타중고"];
+  let labelDataNum = [];
+
+  countData.forEach(function(item,index){
+    labelDataNum[index] = Number(item.value);
+  });
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labelData,
+      datasets: [{
+        label: '등록 상품 카테고리',
+        data: [...labelDataNum],
+        backgroundColor: "rgba(89, 30, 85, 0.7)",
+        borderWidth: 1
+      }]
+    },
+    options: {
+      onResize: function () {
+					ctx.style.height = "";
+				},
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        maintainAspectRatio: false,
+      }
+    });
+    
+</script>
+<script>
+    const ctx2 = document.getElementById('myChart2');
+
+    const prdviews = document.querySelectorAll(".prdviews");
+    const viewsname = document.querySelectorAll(".viewsname");
+    let label2Data = [];
+    let label2DataNum = [];
+
+    prdviews.forEach(function(item,index){
+      label2DataNum[index] = Number(item.value);
+      label2Data[index] = viewsname[index].value;
+    });
+
+    new Chart(ctx2, {
+      type: 'line',
+      data: {
+        labels: label2Data,
+        datasets: [{
+          label: '최근 등록상품 조회수',
+          data: [...label2DataNum],
+          backgroundColor: "rgba(89, 30, 85, 0.7)",
+          borderColor: "rgba(89, 30, 85, 0.7)",
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          }
+        },
+        maintainAspectRatio: false,
+      }
+    });
+    
+  </script>
+  <script>
+    const ctx3 = document.getElementById('myChart3');
+    const chart3price = document.querySelectorAll(".chart3price");
+    let chart3Data = [0,0,0];
+
+    chart3price.forEach(function(item,index){
+      if(0 <= Number(item.value) && Number(item.value) <= 30000){
+        chart3Data[0] += 1;
+      }
+      if(30001 <= Number(item.value) && Number(item.value) <= 100000){
+        chart3Data[1] += 1;
+      }
+      if(100001 <= Number(item.value)){
+        chart3Data[2] += 1;
+      }      
+    });
+
+    new Chart(ctx3, {
+      type: 'pie',
+      data: {
+        labels: ["0~3만원","3~10만원","10만원초과"],
+        datasets: [{
+          label: '등록상품 가격분포',
+          data: [...chart3Data],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        plugins: {
+            legend: {
+              position:'right',
+            }
+        },
+        maintainAspectRatio: false,
+      }
+    });
+  </script>
+  <script src="/js/lefttap.js"></script>
+  <script src="/js/countDown.js"></script>
+    <script>
+        countDownInit("2022-12-21 00:00:00",".time1",".view");
+    </script>
+</body>
+</html>

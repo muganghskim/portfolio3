@@ -44,13 +44,13 @@ const storage = multer.diskStorage({
   
 const upload = multer({ storage: storage })
 
-//메인페이지 get요청
-app.get("/",function(req,res){
+//대시보드페이지 get요청
+app.get("/dash",function(req,res){
   //db에 저장되어 있는 상품목록들 find로 찾아 와서 전송
   db.collection("adlist").find({}).toArray(function(err,result1){
     db.collection("brdlist").find({}).toArray(function(err,result2){
       if(!req.user){
-        res.render("index",{adData:result1,newsData:result2,userData:req.user});
+        res.render("dash",{adData:result1,newsData:result2,userData:req.user});
       }
       else{
         db.collection("prdlist").find({prdauther:req.user.joinnick}).sort({prdid:-1}).toArray(function(err,result3){
@@ -60,7 +60,7 @@ app.get("/",function(req,res){
           });
           let maxcountresult = Math.max(...maxcount);
           db.collection("prdlist").findOne({prdviews:maxcountresult},function(err,result4){
-            res.render("index",{adData:result1,newsData:result2,prdData:result3,userData:req.user,maxCount:result4});
+            res.render("dash",{adData:result1,newsData:result2,prdData:result3,userData:req.user,maxCount:result4});
           });
         });
       }
@@ -87,12 +87,12 @@ app.get("/prdlist/search/prdname",function(req,res){
   //검색어 입력시
   if(req.query.name !== ""){
     db.collection("prdlist").aggregate(prdSearch).toArray(function(err,result){
-      res.render("prdlist",{prdData:result,pageNumber:pageNumber,userData:req.user});
+      res.render("index",{prdData:result,pageNumber:pageNumber,userData:req.user});
     });
   }
   //검색어 미입력시
   else{
-    res.redirect("/prdlist");
+    res.redirect("/");
   }
 });
 
@@ -431,6 +431,7 @@ let prdobject = [{prdoption:"생활가전"},
                 ];
 
 //페이징 함수 호출
+paging("/");
 paging("/prdlist");
 paging("/prdlist/all");
 paging("/prdlist/1",prdobject[0]);
@@ -471,7 +472,7 @@ function paging(para,para2){
     let startFrom = (pageNumber - 1) * perPage
       //db안에 게시글 콜렉션 찾아서 데이터 전부 꺼내오고 ejs파일로 응답
       db.collection("prdlist").find(para2).sort({prdid:-1}).skip(startFrom).limit(perPage).toArray(function(err,result){
-          res.render("prdlist",{prdData:result,
+          res.render("index",{prdData:result,
                                 userData:req.user,
                                 paging:paging,
                                 pageNumber:pageNumber,
