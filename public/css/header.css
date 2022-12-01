@@ -278,4 +278,55 @@
   #header .joinWrap .prdinsertBtn {
     margin-right: 5px;
   }
+  .hbgMenu .hbgFoot {
+    display: none;
+    position: absolute;
+    bottom: 30px;
+    margin-left: 25px;
+    margin-top: 350px;
+  }
+  .hbgMenu .hbgFoot .f-contactBox {
+    position: relative;
+    width: 230px;
+    background-color: rgba(89, 30, 85, 0.7960784314);
+    border-radius: 15px;
+  }
+  .hbgMenu .hbgFoot .f-contactBox .topimg {
+    width: 200px;
+  }
+  .hbgMenu .hbgFoot .f-contactBox .topimg img {
+    transform: translateY(-100px);
+    width: 100%;
+  }
+  .hbgMenu .hbgFoot .f-contactBox .botinfo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10px;
+    color: #fff;
+    text-align: center;
+  }
+  .hbgMenu .hbgFoot .f-contactBox .botinfo h3 {
+    font-size: 15px;
+    margin-bottom: 15px;
+  }
+  .hbgMenu .hbgFoot .f-contactBox .botinfo p {
+    font-size: 13px;
+    color: #f8f8f8;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .hbgMenu .hbgFoot .f-contactBox .botinfo a {
+    display: block;
+    border: 1px solid #fff;
+    color: #fff;
+    width: 50px;
+    height: 18px;
+    margin: 0px auto;
+    transition: all 0.5s;
+  }
+  .hbgMenu .hbgFoot .f-contactBox .botinfo a:hover {
+    background-color: #fff;
+    color: rgba(89, 30, 85, 0.7960784314);
+  }
 }

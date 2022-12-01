@@ -118,8 +118,8 @@
         .center{
             width: 95%;
             margin: 0 2.5%;
-            height: 1100px;
             background-color: #fff;
+            padding-bottom: 30px;
             border-radius: 15px;
             box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.1);
             .gal_tapmenu{
@@ -175,11 +175,15 @@
                     line-height: 50px;
                     font-size: 15px;
                     color: #000;
+                    white-space: pre;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
                 .adlist{
                     display: block;
                     width: 70%;
                     p{
+                        width: 300px;
                         white-space: pre;
                         &:hover{
                             text-decoration: underline;
@@ -235,7 +239,7 @@
         .center{
             width: 60%;
             margin: 0 2.5%;
-            height: 1100px;
+            height: 100vh;
             background-color: #fff;
             border-radius: 15px;
             box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.1);
@@ -362,7 +366,7 @@
             .center{
                 .tap2{
                     justify-content: flex-start;
-                    margin-left: 50px;
+                    margin-left: 17px;
                 }
                 //공지사항 Wrap
                 .line{
@@ -382,6 +386,7 @@
                 //이벤트 Wrap
                 .brdWrap{
                     margin-top: 60px;
+                    
                     .brdlist{
                         width: 45%;
                     }

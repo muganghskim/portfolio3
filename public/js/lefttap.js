@@ -69,6 +69,9 @@ hbgBtn.addEventListener("click",function(){
         bg.style.display = "block";
         bg.addEventListener("click",function(){
             hbgMenu.classList.add("on");
+            hbgBtn.classList.add("on");
+            container.classList.add("on");
+            footer.classList.add("on");
             bg.style.display = "none";
         });
     }
