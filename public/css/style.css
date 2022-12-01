@@ -23,6 +23,7 @@
 #container .boxWrap {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   background-color: rgba(184, 142, 182, 0.2);
 }
 #container .boxWrap > div {
@@ -39,6 +40,7 @@
   justify-content: space-between;
   padding: 15px;
   box-sizing: border-box;
+  position: relative;
 }
 #container .boxWrap .introbox .left-info {
   color: #fff;
@@ -65,6 +67,11 @@
 #container .boxWrap .introbox .left-info a:hover {
   background-color: #fff;
   color: rgba(89, 30, 85, 0.7960784314);
+}
+#container .boxWrap .introbox .right-img {
+  position: absolute;
+  top: 10px;
+  right: 0;
 }
 #container .boxWrap .introbox .right-img img {
   transform: translateY(-20px);
@@ -203,6 +210,9 @@
 #container .boxWrap .newsbox .line p {
   font-size: 14px;
   color: #777;
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 #container .boxWrap .newsbox .line p:nth-child(2) {
   width: 20%;
@@ -360,4 +370,177 @@
 }
 #container .boxWrap .mybox .right .imgWrap img {
   width: 200px;
+}
+
+@media screen and (max-width: 1660px) {
+  #container .boxWrap .introbox .left-info {
+    padding: 32px;
+  }
+  #container .boxWrap .introbox .left-info h3 {
+    font-size: 23px;
+  }
+  #container .boxWrap .introbox .left-info a {
+    width: 120px;
+  }
+  #container .boxWrap .introbox .right-img {
+    position: absolute;
+    top: unset;
+    bottom: -40px;
+    right: 10px;
+    width: 50%;
+  }
+  #container .boxWrap .introbox .right-img img {
+    width: 100%;
+    transform: translateY(-20px);
+  }
+  #container .boxWrap .earningbox {
+    width: 48%;
+  }
+  #container .boxWrap .chart1box {
+    width: 48%;
+    height: 460px;
+  }
+  #container .boxWrap .chart1box #myChart {
+    height: 460px;
+  }
+  #container .boxWrap .adbox {
+    width: 48%;
+  }
+  #container .boxWrap .prdbox {
+    width: 48%;
+  }
+  #container .boxWrap .newsbox {
+    width: 48%;
+  }
+  #container .boxWrap .chart2box {
+    width: 97%;
+  }
+  #container .boxWrap .chart3box {
+    width: 48%;
+  }
+  #container .boxWrap .mybox {
+    width: 48%;
+  }
+  #container .boxWrap .mybox .left {
+    padding-left: 40px;
+  }
+}
+@media screen and (max-width: 1130px) {
+  #container .boxWrap .introbox {
+    width: 97%;
+  }
+  #container .boxWrap .earningbox {
+    width: 97%;
+  }
+  #container .boxWrap .chart1box {
+    width: 97%;
+    height: 460px;
+  }
+  #container .boxWrap .chart1box #myChart {
+    height: 460px;
+  }
+  #container .boxWrap .adbox {
+    width: 97%;
+  }
+  #container .boxWrap .prdbox {
+    width: 97%;
+  }
+  #container .boxWrap .newsbox {
+    width: 97%;
+  }
+  #container .boxWrap .chart2box {
+    width: 97%;
+  }
+  #container .boxWrap .chart3box {
+    width: 97%;
+  }
+  #container .boxWrap .mybox {
+    width: 97%;
+  }
+  #container .boxWrap .mybox .left {
+    padding-left: 40px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  #container .boxWrap .introbox {
+    width: 48%;
+  }
+  #container .boxWrap .earningbox {
+    width: 48%;
+  }
+  #container .boxWrap .chart1box {
+    width: 48%;
+    height: 460px;
+  }
+  #container .boxWrap .chart1box #myChart {
+    height: 460px;
+  }
+  #container .boxWrap .adbox {
+    width: 48%;
+  }
+  #container .boxWrap .prdbox {
+    width: 48%;
+  }
+  #container .boxWrap .newsbox {
+    width: 48%;
+  }
+  #container .boxWrap .chart2box {
+    width: 97%;
+  }
+  #container .boxWrap .chart3box {
+    width: 48%;
+  }
+  #container .boxWrap .mybox {
+    width: 48%;
+  }
+  #container .boxWrap .mybox .left {
+    padding-left: 40px;
+  }
+}
+@media screen and (max-width: 768px) {
+  #container .boxWrap .introbox {
+    width: 97%;
+  }
+  #container .boxWrap .earningbox {
+    width: 97%;
+  }
+  #container .boxWrap .chart1box {
+    width: 97%;
+    height: 460px;
+  }
+  #container .boxWrap .chart1box #myChart {
+    height: 460px;
+  }
+  #container .boxWrap .adbox {
+    width: 97%;
+  }
+  #container .boxWrap .prdbox {
+    width: 97%;
+  }
+  #container .boxWrap .newsbox {
+    width: 97%;
+  }
+  #container .boxWrap .chart2box {
+    width: 97%;
+    height: 460px;
+    flex-direction: column;
+  }
+  #container .boxWrap .chart2box .left-count {
+    width: 100%;
+    padding: 20px 0;
+  }
+  #container .boxWrap .chart2box .right-prd {
+    width: 100%;
+    margin-left: 0px;
+    padding: 20px 0;
+  }
+  #container .boxWrap .chart3box {
+    width: 97%;
+  }
+  #container .boxWrap .mybox {
+    width: 97%;
+  }
+  #container .boxWrap .mybox .left {
+    padding-left: 40px;
+  }
 }

@@ -23,7 +23,7 @@
   margin-bottom: 15px;
 }
 #container .storeWrap .center .left #local > div select {
-  width: 120px;
+  width: 100px;
   height: 30px;
   margin-right: 10px;
   border: 1px solid rgba(89, 30, 85, 0.3882352941);
@@ -39,7 +39,7 @@
   margin-bottom: 15px;
 }
 #container .storeWrap .center .left .searchForm > div input {
-  width: 250px;
+  width: 210px;
   height: 30px;
   margin-right: 10px;
   border: 1px solid rgba(89, 30, 85, 0.3882352941);
@@ -79,12 +79,20 @@
 }
 #container .storeWrap .center .right .storelist .line {
   padding: 15px 0;
+  font-size: 14px;
   width: 25%;
   text-align: center;
   color: #777;
   border-bottom: 1px solid rgba(184, 142, 182, 0.2);
 }
+#container .storeWrap .center .right .storelist .line > div {
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 #container .storeWrap .center .right .storelist .line .adressData:hover {
+  display: inline;
+  white-space: pre-wrap;
   text-decoration: underline;
   cursor: pointer;
 }
@@ -166,7 +174,7 @@
   width: 70%;
 }
 #container .newsWrap .center .line .adlist p {
-  width: 100%;
+  white-space: pre;
 }
 #container .newsWrap .center .line .adlist p:hover {
   text-decoration: underline;
@@ -220,28 +228,28 @@
   border-radius: 15px;
   box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.1);
 }
-#container .newsWrapdetail .center > div {
+#container .newsWrapdetail .center .eventWrap, #container .newsWrapdetail .center > div {
   padding: 30px;
   position: relative;
 }
-#container .newsWrapdetail .center > div > div img {
-  width: 740px;
+#container .newsWrapdetail .center .eventWrap .imgWrap img, #container .newsWrapdetail .center > div .imgWrap img {
+  width: 100%;
 }
-#container .newsWrapdetail .center > div h3 {
+#container .newsWrapdetail .center .eventWrap h3, #container .newsWrapdetail .center > div h3 {
   padding-top: 15px;
   padding-bottom: 20px;
   color: rgba(89, 30, 85, 0.7960784314);
 }
-#container .newsWrapdetail .center > div p {
+#container .newsWrapdetail .center .eventWrap p, #container .newsWrapdetail .center > div p {
   white-space: pre-wrap;
   line-height: 1.3;
 }
-#container .newsWrapdetail .center > div .topposition {
+#container .newsWrapdetail .center .eventWrap .topposition, #container .newsWrapdetail .center > div .topposition {
   position: absolute;
   top: 30px;
   right: 30px;
 }
-#container .newsWrapdetail .center > div .middelposition {
+#container .newsWrapdetail .center .eventWrap .middelposition, #container .newsWrapdetail .center > div .middelposition {
   margin-top: 20px;
 }
 #container .newsWrapdetail .center a {
@@ -250,4 +258,82 @@
 }
 #container .newsWrapdetail .center a i {
   margin-right: 5px;
+}
+
+@media screen and (max-width: 1660px) {
+  #container .storeWrap .center .left {
+    width: 38%;
+  }
+  #container .storeWrap .center .left #local > div select {
+    display: block;
+    margin-bottom: 10px;
+  }
+  #container .storeWrap .center .left .searchForm > div input {
+    display: block;
+    margin-bottom: 10px;
+    width: 130px;
+  }
+  #container .newsWrap .center .brdWrap {
+    margin-top: 60px;
+  }
+  #container .newsWrap .center .brdWrap .brdlist {
+    width: 29%;
+  }
+}
+@media screen and (max-width: 768px) {
+  #container .storeWrap .center {
+    flex-direction: column;
+  }
+  #container .storeWrap .center .left {
+    width: 98%;
+    height: 300px;
+  }
+  #container .storeWrap .center .left #local > div select {
+    display: inline;
+    width: 150px;
+    margin-bottom: 10px;
+  }
+  #container .storeWrap .center .left .searchForm > div input {
+    display: inline;
+    margin-bottom: 10px;
+    width: 310px;
+  }
+  #container .storeWrap .center .right {
+    width: 98%;
+    box-sizing: border-box;
+  }
+  #container .newsWrap .center .tap2 {
+    justify-content: flex-start;
+    margin-left: 50px;
+  }
+  #container .newsWrap .center .line .adlist {
+    display: block;
+    width: 70%;
+  }
+  #container .newsWrap .center .line .adlist p {
+    white-space: pre;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  #container .newsWrap .center .line .adlist p:hover {
+    text-decoration: underline;
+  }
+  #container .newsWrap .center .brdWrap {
+    margin-top: 60px;
+  }
+  #container .newsWrap .center .brdWrap .brdlist {
+    width: 45%;
+  }
+  #container .newsWrapdetail .center {
+    width: 97%;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 560px) {
+  #container .newsWrap .center .brdWrap {
+    margin-top: 40px;
+  }
+  #container .newsWrap .center .brdWrap .brdlist {
+    width: 97%;
+  }
 }

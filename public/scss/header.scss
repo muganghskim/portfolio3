@@ -2,53 +2,58 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .hbgBtn{
-        cursor: pointer;
-        transition: all 0.5s;
-        margin-left: 280px;
-        &.on{
-            margin-left: 0;
-            .top{
-                width: 15px;
-                transform: translate(15px,1px) rotateZ(45deg);
-            }
-            .bot{
-                width: 15px;
-                transform: translate(15px,-1px) rotateZ(-45deg);
-            }
-        }
-        span{
-            display: block;
-            width: 30px;
-            height: 2px;
-            background-color: #b88eb67c;
-            margin-left: 30px;
-        }
-        .top{
-            margin-bottom: 5px;
-        }
-        .mid{
-            margin-bottom: 5px;
-        }
-    }
-    .searchBox{
+    .left{
         display: flex;
-        margin-right: 400px;
-        input{
-            width: 685px;
-            height: 40px;
-            border: 1px solid #b88eb633;
-            border-radius: 20px;
-            padding-left: 10px;
-        }
-        button{
-            background-color: transparent;
-            border: none;
-            color: #777;
-            font-size: 18px;
-            margin-left: 5px;
-            transform: translateY(3px);
+        align-items: center;
+        .hbgBtn{
             cursor: pointer;
+            transition: all 0.5s;
+            margin-left: 280px;
+            &.on{
+                margin-left: 0;
+                .top{
+                    width: 15px;
+                    transform: translate(15px,1px) rotateZ(45deg);
+                }
+                .bot{
+                    width: 15px;
+                    transform: translate(15px,-1px) rotateZ(-45deg);
+                }
+            }
+            span{
+                display: block;
+                width: 30px;
+                height: 2px;
+                background-color: #b88eb67c;
+                margin-left: 30px;
+                transition: all 0.5s;
+            }
+            .top{
+                margin-bottom: 5px;
+            }
+            .mid{
+                margin-bottom: 5px;
+            }
+        }
+        .searchBox{
+            display: flex;
+            margin: 0 20px;
+            input{
+                width: 685px;
+                height: 40px;
+                border: 1px solid #b88eb633;
+                border-radius: 20px;
+                padding-left: 10px;
+            }
+            button{
+                background-color: transparent;
+                border: none;
+                color: #777;
+                font-size: 18px;
+                margin-left: 5px;
+                transform: translateY(3px);
+                cursor: pointer;
+            }
         }
     }
     .joinWrap{
@@ -73,12 +78,24 @@
 .hbgMenu.on{
     left: -100%;
 }
+
 .hbgMenu{
     position: fixed;
     height: 100vh;
     left: 0;
     top: 0;
     transition: all 0.5s;
+    z-index: 9;
+    .bg{
+        display: none;
+        position: absolute;
+        left: 290px;
+        top: 0;
+        width:  3000px;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        cursor: pointer;
+    }
     .logo{
         width: 150px;
         line-height: 100px;
@@ -233,5 +250,77 @@
         font-size: 13px;
         line-height: 50px;
         margin-left: 280px;
+    }
+}
+
+//반응형 1660px 이하
+@media screen and (max-width:1660px){
+    #header{
+        .left{
+            .searchBox{
+                input{
+                    width: 500px;
+                }
+            }
+        }
+    }
+}
+
+//반응형 1360px 이하
+@media screen and (max-width:1360px){
+    #header{
+        .left{
+            .searchBox{
+                input{
+                    width: 400px;
+                }
+            }
+        }
+        .joinWrap{
+            >a{
+                width: 80px;
+            }
+        }
+    }
+}
+
+//반응형 1130px 이하
+@media screen and (max-width:1130px){
+    #header{
+        .left{
+            .searchBox{
+                input{
+                    width: 300px;
+                }
+            }
+        }
+        .joinWrap{
+            >a{
+                width: 80px;
+            }
+        }
+    }
+}
+
+//반응형 768px 이하
+@media screen and (max-width:768px){
+    #header{
+        .left{
+            .searchBox{
+                input{
+                    width: 100px;
+                }
+            }
+        }
+        .joinWrap{
+            margin-right: 10px;
+            >a{
+                width: 70px;
+                font-size: 13px;
+            }
+            .prdinsertBtn{
+                margin-right: 5px;
+            }
+        }
     }
 }

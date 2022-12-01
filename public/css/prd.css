@@ -263,7 +263,8 @@
   border-bottom: 1px solid rgba(184, 142, 182, 0.2);
 }
 #container .detail_center .detailWrap .detail_info .detail_icon2 .icfir {
-  margin-right: 50px;
+  margin-right: 35px;
+  font-size: 12px;
   color: #777;
 }
 #container .detail_center .detailWrap .detail_info .detail_icon2 .ic {
@@ -465,4 +466,51 @@
 }
 #container .paging.store {
   background-color: #fff;
+}
+
+@media screen and (max-width: 1660px) {
+  #container .prdhd .gal_tapmenu li {
+    width: 90px;
+  }
+  #container .gridWrap .grid_list {
+    width: 31%;
+  }
+}
+@media screen and (max-width: 1200px) {
+  #container .prdhd .gal_tapmenu li {
+    width: 90px;
+  }
+  #container .gridWrap .grid_list {
+    width: 48%;
+  }
+}
+@media screen and (max-width: 768px) {
+  #container .prdhd .gal_tapmenu {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 0;
+    flex-wrap: wrap;
+  }
+  #container .prdhd .gal_tapmenu li {
+    margin: unset;
+    width: 90px;
+  }
+  #container .gridWrap .grid_list {
+    width: 48%;
+  }
+  #container .detail_center .detailWrap {
+    flex-direction: column;
+  }
+  #container .detail_center .detailWrap .imgWrap {
+    width: 98%;
+  }
+  #container .detail_center .detailWrap .detail_info {
+    width: 98%;
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 650px) {
+  #container .gridWrap .grid_list {
+    width: 97%;
+  }
 }

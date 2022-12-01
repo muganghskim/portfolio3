@@ -263,7 +263,8 @@
                     align-items: center;
                     border-bottom: 1px solid #b88eb633;
                     .icfir{
-                        margin-right: 50px;
+                        margin-right: 35px;
+                        font-size: 12px;
                         color: #777;
                     }
                     .ic{
@@ -477,5 +478,88 @@
     }
     .paging.store{
         background-color: #fff;
+    }
+}
+
+//반응형 1660px 이하
+@media screen and (max-width:1660px){
+    #container{
+        .prdhd{
+            .gal_tapmenu{
+                li{
+                    width: 90px;
+                }
+            }
+        }
+        .gridWrap{
+            .grid_list{
+                width: 31%;
+            }
+        }
+    }
+}
+
+//반응형 1200px 이하
+@media screen and (max-width:1200px){
+    #container{
+        .prdhd{
+            .gal_tapmenu{
+                li{
+                    width: 90px;
+                }
+            }
+        }
+        .gridWrap{
+            .grid_list{
+                width: 48%;
+            }
+        }
+    }
+}
+
+//반응형 768px 이하
+@media screen and (max-width:768px){
+    #container{
+        .prdhd{
+            .gal_tapmenu{
+                width: 80%;
+                margin: 0 auto;
+                padding: 20px 0;
+                flex-wrap: wrap;
+                li{
+                    margin: unset;
+                    width: 90px;
+                }
+            }
+        }
+        .gridWrap{
+            .grid_list{
+                width: 48%;
+            }
+        }
+        .detail_center{
+            .detailWrap{
+                flex-direction: column;
+                .imgWrap{
+                    width: 98%;
+                }
+                .detail_info{
+                    width: 98%;
+                    box-sizing: border-box;
+                }
+            }
+        }
+    }
+}
+
+//반응형 650px 이하
+@media screen and (max-width:650px){
+    #container{
+        .gridWrap{
+            .grid_list{
+                width: 97%;
+            }
+        }
+
     }
 }

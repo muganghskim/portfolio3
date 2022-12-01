@@ -22,6 +22,7 @@
     .boxWrap{
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
         background-color: #b88eb633;
         >div{
             margin: 1% 0.5%;
@@ -37,6 +38,7 @@
             justify-content: space-between;
             padding: 15px;
             box-sizing: border-box;
+            position: relative;
             .left-info{
                 color: #fff;
                 padding: 35px;
@@ -64,6 +66,9 @@
                 }
             }
             .right-img{
+                position: absolute;
+                top: 10px;
+                right: 0;
                 img{
                     transform: translateY(-20px);
                 }
@@ -204,6 +209,9 @@
                 p{
                     font-size: 14px;
                     color: #777;
+                    white-space: pre;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                     &:nth-child(2){
                         width: 20%;
                         margin-left: 15px;
@@ -214,6 +222,7 @@
                     }
                     a{
                         color: #591e55cb;
+                        
                     }
                 }
                 
@@ -367,3 +376,203 @@
         }
     }
 }
+
+
+//반응형 1660 이하
+@media screen and (max-width:1660px){
+    #container{
+        .boxWrap{
+            .introbox{
+                .left-info{
+                    padding: 32px;
+                    h3{
+                        font-size: 23px;
+                    }
+                    a{
+                        width: 120px;
+                    }
+                }
+                .right-img{
+                    position: absolute;
+                    top: unset;
+                    bottom: -40px;
+                    right: 10px;
+                    width: 50%;
+                    img{
+                        width: 100%;
+                        transform: translateY(-20px);
+                    }
+                }
+            }
+            .earningbox{
+                width: 48%;
+            }
+            .chart1box{
+                width: 48%;
+                height: 460px;
+                #myChart{
+                    height: 460px;
+                }
+            }
+            .adbox{
+                width: 48%;
+            }
+            .prdbox{
+                width: 48%;
+            }
+            .newsbox{
+                width: 48%;
+            }
+            .chart2box{
+                width: 97%;
+            }
+            .chart3box{
+                width: 48%;
+            }
+            .mybox{
+                width: 48%;
+                .left{
+                    padding-left: 40px;
+                }
+            }
+        }
+    }
+}
+
+//반응형 1130 이하
+@media screen and (max-width:1130px){
+    #container{
+        .boxWrap{
+            .introbox{
+                width: 97%;
+            }
+            .earningbox{
+                width: 97%;
+            }
+            .chart1box{
+                width: 97%;
+                height: 460px;
+                #myChart{
+                    height: 460px;
+                }
+            }
+            .adbox{
+                width: 97%;
+            }
+            .prdbox{
+                width: 97%;
+            }
+            .newsbox{
+                width: 97%;
+            }
+            .chart2box{
+                width: 97%;
+            }
+            .chart3box{
+                width: 97%;
+            }
+            .mybox{
+                width: 97%;
+                .left{
+                    padding-left: 40px;
+                }
+            }
+        }
+    }
+}
+
+//반응형 1000 이하
+@media screen and (max-width:1000px){
+    #container{
+        .boxWrap{
+            .introbox{
+                width: 48%;
+            }
+            .earningbox{
+                width: 48%;
+            }
+            .chart1box{
+                width: 48%;
+                height: 460px;
+                #myChart{
+                    height: 460px;
+                }
+            }
+            .adbox{
+                width: 48%;
+            }
+            .prdbox{
+                width: 48%;
+            }
+            .newsbox{
+                width: 48%;
+            }
+            .chart2box{
+                width: 97%;
+            }
+            .chart3box{
+                width: 48%;
+            }
+            .mybox{
+                width: 48%;
+                .left{
+                    padding-left: 40px;
+                }
+            }
+        }
+    }
+}
+
+//반응형 768 이하
+@media screen and (max-width:768px){
+    #container{
+        .boxWrap{
+            .introbox{
+                width: 97%;
+            }
+            .earningbox{
+                width: 97%;
+            }
+            .chart1box{
+                width: 97%;
+                height: 460px;
+                #myChart{
+                    height: 460px;
+                }
+            }
+            .adbox{
+                width: 97%;
+            }
+            .prdbox{
+                width: 97%;
+            }
+            .newsbox{
+                width: 97%;
+            }
+            .chart2box{
+                width: 97%;
+                height: 460px;
+                flex-direction: column;
+                .left-count{
+                    width: 100%;
+                    padding: 20px 0;
+                }
+                .right-prd{
+                    width: 100%;
+                    margin-left: 0px;
+                    padding: 20px 0;
+                }
+            }
+            .chart3box{
+                width: 97%;
+            }
+            .mybox{
+                width: 97%;
+                .left{
+                    padding-left: 40px;
+                }
+            }
+        }
+    }
+}
+

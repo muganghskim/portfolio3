@@ -1,4 +1,5 @@
 #container{
+    //지역마켓
     .storeWrap{
         background-color: #b88eb633;
         padding-bottom: 2%;
@@ -20,7 +21,7 @@
                             margin-bottom: 15px;
                         }
                         select{
-                            width: 120px;
+                            width: 100px;
                             height: 30px;
                             margin-right: 10px;
                             border: 1px solid #591e5563;
@@ -41,7 +42,7 @@
                             margin-bottom: 15px;
                         }
                         input{
-                            width: 250px;
+                            width: 210px;
                             height: 30px;
                             margin-right: 10px;
                             border: 1px solid #591e5563;
@@ -82,11 +83,20 @@
                     justify-content: space-between;
                     .line{
                         padding: 15px 0;
+                        font-size: 14px;
                         width: 25%;
                         text-align: center;
                         color: #777;
                         border-bottom: 1px solid #b88eb633;
+                        > div{
+                            white-space: pre;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
                         .adressData:hover{
+                            display: inline;
+                            white-space: pre-wrap;
+                           
                             text-decoration: underline;
                             cursor: pointer;
                         }
@@ -170,7 +180,7 @@
                     display: block;
                     width: 70%;
                     p{
-                        width: 100%;
+                        white-space: pre;
                         &:hover{
                             text-decoration: underline;
                         }
@@ -229,12 +239,12 @@
             background-color: #fff;
             border-radius: 15px;
             box-shadow: 1px 1px 8px 1px rgba(0,0,0,0.1);
-            > div{
+            .eventWrap, > div{
                 padding: 30px;
                 position: relative;
-                > div{
+                .imgWrap{
                     img{
-                      width: 740px;
+                        width: 100%;
                     }
                 }
                 h3{
@@ -262,6 +272,143 @@
                 }
                 color: #777;
                 padding: 30px;
+            }
+        }
+    }
+}
+
+
+//반응형 1660px 이하
+@media screen and (max-width:1660px){
+    #container{
+        //지역마켓
+        .storeWrap{
+            .center{
+                .left{
+                    width: 38%;
+                    #local{
+                        > div{
+                            select{
+                                display: block;
+                                margin-bottom: 10px;
+                            }
+                        }
+                    }
+                    .searchForm{
+                        > div{
+                            input{
+                                display: block;
+                                margin-bottom: 10px;
+                                width: 130px;
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .newsWrap{
+            .center{
+                //이벤트 Wrap
+                .brdWrap{
+                    margin-top: 60px;
+                    .brdlist{
+                        width: 29%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//반응형 768px 이하
+@media screen and (max-width:768px){
+    #container{
+        //지역마켓
+        .storeWrap{
+            .center{
+                flex-direction: column;
+                .left{
+                    width: 98%;
+                    height: 300px;
+                    #local{
+                        > div{
+                            select{
+                                display: inline;
+                                width: 150px;
+                                margin-bottom: 10px;
+                            }
+                        }
+                    }
+                    .searchForm{
+                        > div{
+                            input{
+                                display: inline;
+                                margin-bottom: 10px;
+                                width: 310px;
+                                
+                            }
+                        }
+                    }
+                }
+                .right{
+                    width: 98%;
+                    box-sizing: border-box;
+                }
+            }
+        }
+        //공지사항
+        .newsWrap{
+            .center{
+                .tap2{
+                    justify-content: flex-start;
+                    margin-left: 50px;
+                }
+                //공지사항 Wrap
+                .line{
+                    .adlist{
+                        display: block;
+                        width: 70%;
+                        p{
+                            white-space: pre;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            &:hover{
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+                //이벤트 Wrap
+                .brdWrap{
+                    margin-top: 60px;
+                    .brdlist{
+                        width: 45%;
+                    }
+                }
+            }
+        }
+        //공지사항 상세
+        .newsWrapdetail{
+            .center{
+                width: 97%;
+                margin: 0 auto;
+            }
+        }
+    }
+}
+//반응형 560px 이하
+@media screen and (max-width:560px){
+    #container{
+        .newsWrap{
+            .center{
+                //이벤트 Wrap
+                .brdWrap{
+                    margin-top: 40px;
+                    .brdlist{
+                        width: 97%;
+                    }
+                }
             }
         }
     }

@@ -3,47 +3,52 @@
   justify-content: space-between;
   align-items: center;
 }
-#header .hbgBtn {
+#header .left {
+  display: flex;
+  align-items: center;
+}
+#header .left .hbgBtn {
   cursor: pointer;
   transition: all 0.5s;
   margin-left: 280px;
 }
-#header .hbgBtn.on {
+#header .left .hbgBtn.on {
   margin-left: 0;
 }
-#header .hbgBtn.on .top {
+#header .left .hbgBtn.on .top {
   width: 15px;
   transform: translate(15px, 1px) rotateZ(45deg);
 }
-#header .hbgBtn.on .bot {
+#header .left .hbgBtn.on .bot {
   width: 15px;
   transform: translate(15px, -1px) rotateZ(-45deg);
 }
-#header .hbgBtn span {
+#header .left .hbgBtn span {
   display: block;
   width: 30px;
   height: 2px;
   background-color: rgba(184, 142, 182, 0.4862745098);
   margin-left: 30px;
+  transition: all 0.5s;
 }
-#header .hbgBtn .top {
+#header .left .hbgBtn .top {
   margin-bottom: 5px;
 }
-#header .hbgBtn .mid {
+#header .left .hbgBtn .mid {
   margin-bottom: 5px;
 }
-#header .searchBox {
+#header .left .searchBox {
   display: flex;
-  margin-right: 400px;
+  margin: 0 20px;
 }
-#header .searchBox input {
+#header .left .searchBox input {
   width: 685px;
   height: 40px;
   border: 1px solid rgba(184, 142, 182, 0.2);
   border-radius: 20px;
   padding-left: 10px;
 }
-#header .searchBox button {
+#header .left .searchBox button {
   background-color: transparent;
   border: none;
   color: #777;
@@ -80,6 +85,17 @@
   left: 0;
   top: 0;
   transition: all 0.5s;
+  z-index: 9;
+}
+.hbgMenu .bg {
+  display: none;
+  position: absolute;
+  left: 290px;
+  top: 0;
+  width: 3000px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
 .hbgMenu .logo {
   width: 150px;
@@ -225,4 +241,41 @@
   font-size: 13px;
   line-height: 50px;
   margin-left: 280px;
+}
+
+@media screen and (max-width: 1660px) {
+  #header .left .searchBox input {
+    width: 500px;
+  }
+}
+@media screen and (max-width: 1360px) {
+  #header .left .searchBox input {
+    width: 400px;
+  }
+  #header .joinWrap > a {
+    width: 80px;
+  }
+}
+@media screen and (max-width: 1130px) {
+  #header .left .searchBox input {
+    width: 300px;
+  }
+  #header .joinWrap > a {
+    width: 80px;
+  }
+}
+@media screen and (max-width: 768px) {
+  #header .left .searchBox input {
+    width: 100px;
+  }
+  #header .joinWrap {
+    margin-right: 10px;
+  }
+  #header .joinWrap > a {
+    width: 70px;
+    font-size: 13px;
+  }
+  #header .joinWrap .prdinsertBtn {
+    margin-right: 5px;
+  }
 }
