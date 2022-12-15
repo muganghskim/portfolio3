@@ -6,15 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>관리자 매장등록 페이지</title>
-    <link rel="stylesheet" href="/css/admin_prdlist.css">
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
     <!-- 상품등록 페이지 a / 매장등록 페이지 a -->
     <ul class="admin_menu">
-        <li><a href="/admin/prdlist">상품등록페이지</a></li>
+        <li><a href="/admin/adlist">이벤트등록페이지</a></li>
         <li><a href="/admin/storelist">매장등록페이지</a></li>
-        <li><a href="/admin/brdlist">뉴스등록페이지</a></li>
+        <li><a href="/admin/brdlist">공지사항등록페이지</a></li>
+        <li><a href="/">가지마켓 메인 페이지</a></li>
     </ul>
+    <h2 class="adminmaintitle">매장 등록 페이지</h2>
     <!-- 등록된 매장 정보 전부 보이는 구간 -->
     <div class="storewrap">
         <% for(let i = 0; i < storeData.length; i++){ %>
@@ -42,13 +44,39 @@
             </div>
             <div class="line">
                 <div class="upt">수정</div>
-                <a class="del" href="#">삭제</a>
+                <a class="del" href="/storelist/delete/<%-storeData[i].num%>">삭제</a>
             </div>
         </div>
+        <form class="storeupt" action="/upt/store" method="post">
+            <input type="hidden" name="id" value="<%-storeData[i].num%>">
+            <!-- 시/도 선택 -->
+            <select class="city1upt" name="city1" required>
+                <option value>시/도 선택</option>
+            </select>
+            <!-- 구/군 선택 -->
+            <select class="city2upt" name="city2" required>
+                <option value>구/군 선택</option>
+            </select>
+            <!-- 매장명 -->
+            <input type="text" value="<%- storeData[i].name %>" name="name" required>
+            <!-- 매장전화번호 -->
+            <input type="text" value="<%- storeData[i].phone %>" name="phone" required>
+            <!-- 매장위치 검색기능 -->
+            <!-- <input type="text" id="sample4_postcode" style="display: none;" placeholder="우편번호">
+            <input type="button" onclick="sample4_execDaumPostcode()" value="주소검색"><br> -->
+            <input type="text" name="detail" placeholder="도로명주소">
+            <!-- <input type="text" id="sample4_jibunAddress" style="display: none;" placeholder="지번주소">
+            <span id="guide" style="color:#999;display:none"></span>
+            <input type="text" id="sample4_detailAddress" style="display: none;"  placeholder="상세주소">
+            <input type="text" id="sample4_extraAddress" style="display: none;" placeholder="참고항목"> -->
+            <button class="cancel" type="button">취소</button>
+            <button type="submit">매장수정</button>
+        </form>
         <% } %>
     </div>
+    <h2 class="adminmaintitle">매장 등록</h2>
     <!-- 매장등록 폼태그 -->
-    <form action="/addstore" method="post">
+    <form class="adminstoreForm" action="/addstore" method="post">
         <!-- 시/도 선택 -->
         <select class="city1" name="city1" required>
             <option value>시/도 선택</option>
@@ -73,6 +101,28 @@
         <button type="submit">매장등록</button>
     </form>
 
+    <script>
+        const uptBtns = document.querySelectorAll(".upt");
+        const delBtns = document.querySelectorAll(".del");
+        const uptForms = document.querySelectorAll(".storeupt");
+        const cancelBtns = document.querySelectorAll(".cancel");
+        uptBtns.forEach(function(item,index){
+            item.addEventListener("click",function(){
+                uptForms[index].style.display = "flex";
+            });
+
+            cancelBtns[index].addEventListener("click",function(){
+                uptForms[index].style.display = "none";
+            });
+
+            delBtns[index].addEventListener("click",function(e){
+                let a = window.confirm("진짜로 삭제 하시겠습니까?");
+                if(!a){
+                    e.preventDefault();
+                }
+            });
+        }); 
+    </script>
     <script src="/js/hangjungdong.js"></script>
     <script src="/js/storeselect.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

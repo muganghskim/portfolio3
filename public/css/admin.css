@@ -1,0 +1,78 @@
+.title {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translateX(-50%);
+}
+
+.adminloginWrap {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.adminloginWrap .adminlogin .hint {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.admin_menu {
+  display: flex;
+}
+.admin_menu li {
+  list-style: none;
+  margin: 0 10px;
+}
+.admin_menu li:last-child {
+  margin-left: 800px;
+}
+
+.brdwrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+.brdwrap .list {
+  width: 200px;
+  margin: 10px;
+  border: 1px solid #000;
+}
+.brdwrap .list img {
+  width: 100%;
+}
+.brdwrap .adupt {
+  display: none;
+  flex-direction: column;
+  width: 100px;
+}
+.brdwrap .brdupt {
+  display: none;
+  flex-direction: column;
+  width: 100px;
+}
+
+.storewrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+.storewrap .list {
+  width: 200px;
+  margin: 10px;
+  border: 1px solid #000;
+}
+.storewrap .storeupt {
+  display: none;
+  flex-direction: column;
+  width: 100px;
+}
+
+.adminmaintitle {
+  text-align: center;
+}
+
+.adminstoreForm, .adminbrdForm, .adminadForm {
+  display: flex;
+  justify-content: center;
+}
+.adminstoreForm select, .adminstoreForm input, .adminstoreForm button, .adminbrdForm select, .adminbrdForm input, .adminbrdForm button, .adminadForm select, .adminadForm input, .adminadForm button {
+  margin: 0 4px;
+}

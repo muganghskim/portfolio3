@@ -5,15 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>관리자 이벤트등록 페이지</title>
-    <link rel="stylesheet" href="/css/admin_prdlist.css">
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
     <!-- 등록 페이지 a -->
     <ul class="admin_menu">
         <li><a href="/admin/adlist">이벤트등록페이지</a></li>
         <li><a href="/admin/storelist">매장등록페이지</a></li>
-        <li><a href="/admin/brdlist">뉴스등록페이지</a></li>
+        <li><a href="/admin/brdlist">공지사항등록페이지</a></li>
+        <li><a href="/">가지마켓 메인 페이지</a></li>
     </ul>
+    <h2 class="adminmaintitle">이벤트 등록 페이지</h2>
     <!-- 등록된 이벤트목록 전부다 보여주는 구간 -->
     <div class="brdwrap">
         <% for(let i=0; i < adData.length; i++){ %>
@@ -22,15 +24,51 @@
             <p><%-adData[i].name%></p>
             <p><%-adData[i].time%></p>
             <img src="/upload/<%-adData[i].thumbnail%>">
+            <div class="btns">
+                <div class="upt">수정</div>
+                <a class="del" href="/adlist/delete/<%-adData[i].num%>">삭제</a>
+            </div>
         </div>
+        <form class="adupt" enctype="multipart/form-data" action="/upt/adlist" method="post">
+            <input type="hidden" name="id" value="<%-adData[i].num%>">
+            <input type="text" name="name" value="<%-adData[i].name%>" placeholder="제목">
+            <textarea name="context" placeholder="설명"><%-adData[i].conext%></textarea>
+            <input type="file" name="thumbnail">
+            <input type="hidden" name="originfile" value="<%- adData[i].thumbnail %>">
+            <button type="submit">이벤트수정</button>
+            <button class="cancel" type="button">취소</button>
+        </form>
         <% } %>
     </div>
+    <h2 class="adminmaintitle">이벤트 등록</h2>
     <!-- 이벤트를 등록하는 form태그 구간 -->
-    <form enctype="multipart/form-data" action="/add/adlist" method="post">
+    <form class="adminadForm" enctype="multipart/form-data" action="/add/adlist" method="post">
         <input type="text" name="name" placeholder="제목">
         <textarea name="context" placeholder="설명"></textarea>
         <input type="file" name="thumbnail">
         <button type="submit">이벤트등록</button>
     </form>
+    <script>
+        const uptBtns = document.querySelectorAll(".upt");
+        const delBtns = document.querySelectorAll(".del");
+        const uptForms = document.querySelectorAll(".adupt");
+        const cancelBtns = document.querySelectorAll(".cancel");
+        uptBtns.forEach(function(item,index){
+            item.addEventListener("click",function(){
+                uptForms[index].style.display = "flex";
+            });
+
+            cancelBtns[index].addEventListener("click",function(){
+                uptForms[index].style.display = "none";
+            });
+
+            delBtns[index].addEventListener("click",function(e){
+                let a = window.confirm("진짜로 삭제 하시겠습니까?");
+                if(!a){
+                    e.preventDefault();
+                }
+            });
+        }); 
+    </script>
 </body>
 </html>

@@ -103,7 +103,12 @@ app.get("/admin",function(req,res){
 
 //관리자 화면 로그인 유무 확인
 app.post("/login",passport.authenticate('local', {failureRedirect : '/fail'}),function(req,res){
+  if(req.user.joinid == "admin"){
     res.redirect("/admin/brdlist");
+  }
+  else{
+    res.redirect("/fail");
+  }
     //로그인 성공 시 상품 등록 페이지로 이동
 });
 
@@ -558,6 +563,85 @@ app.post("/update",upload.single('uptfile'),function(req,res){
     },function(err,result){
         res.redirect("/prddetail/" + req.body.id);
     });
+});
+
+//이벤트 수정후 업데이트
+app.post("/upt/adlist",upload.single('thumbnail'),function(req,res){
+  //db에 수정된 데이터 업데이트
+  //첨부파일을 했다면 해당 파일의 파일명
+  if(req.file){
+      fileUpload = req.file.originalname;
+  }
+  else{
+      fileUpload = req.body.originfile;
+  }
+
+  db.collection("adlist").updateOne({num:Number(req.body.id)},{
+      $set:{
+          name:req.body.name,
+          conext:req.body.context,
+          thumbnail:fileUpload     
+      }
+  },function(err,result){
+      res.redirect("/admin/adlist");
+  });
+});
+
+//이벤트 삭제 페이지
+app.get("/adlist/delete/:no",function(req,res){
+  //db안에 데이터 삭제
+  db.collection("adlist").deleteOne({num:Number(req.params.no)},function(err,result){
+      res.redirect("/admin/adlist");
+  });
+});
+
+//공지사항 수정후 업데이트
+app.post("/upt/brdlist",function(req,res){
+  //db에 수정된 데이터 업데이트
+  //첨부파일을 했다면 해당 파일의 파일명
+
+  db.collection("brdlist").updateOne({num:Number(req.body.id)},{
+      $set:{
+          name:req.body.name,
+          conext:req.body.context,
+          newsoption:req.body.newsoption
+      }
+  },function(err,result){
+      res.redirect("/admin/brdlist");
+  });
+});
+
+//공지사항 삭제 페이지
+app.get("/brdlist/delete/:no",function(req,res){
+  //db안에 데이터 삭제
+  db.collection("brdlist").deleteOne({num:Number(req.params.no)},function(err,result){
+      res.redirect("/admin/brdlist");
+  });
+});
+
+//store 업데이트
+app.post("/upt/store",function(req,res){
+  //db에 수정된 데이터 업데이트
+
+  db.collection("storelist").updateOne({num:Number(req.body.id)},{
+      $set:{
+        name:req.body.name,
+        sido:req.body.city1,
+        sigugun:req.body.city2,
+        adress:req.body.detail,
+        phone:req.body.phone  
+      }
+  },function(err,result){
+      res.redirect("/admin/storelist");
+  });
+});
+
+//매장 삭제 페이지
+app.get("/storelist/delete/:no",function(req,res){
+  //db안에 데이터 삭제
+  db.collection("storelist").deleteOne({num:Number(req.params.no)},function(err,result){
+      res.redirect("/admin/storelist");
+  });
 });
 
 //게시글삭제 페이지

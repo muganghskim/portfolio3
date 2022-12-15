@@ -5,15 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>관리자 뉴스등록 페이지</title>
-    <link rel="stylesheet" href="/css/admin_prdlist.css">
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
     <!-- 등록 페이지 a -->
     <ul class="admin_menu">
         <li><a href="/admin/adlist">이벤트등록페이지</a></li>
         <li><a href="/admin/storelist">매장등록페이지</a></li>
-        <li><a href="/admin/brdlist">뉴스등록페이지</a></li>
+        <li><a href="/admin/brdlist">공지사항등록페이지</a></li>
+        <li><a href="/">가지마켓 메인 페이지</a></li>
     </ul>
+    <h2 class="adminmaintitle">공지사항 등록 페이지</h2>
     <!-- 등록된 뉴스목록 전부다 보여주는 구간 -->
     <div class="brdwrap">
         <% for(let i=0; i < brdData.length; i++){ %>
@@ -22,11 +24,28 @@
             <p><%-brdData[i].newsoption%></p>
             <p><%-brdData[i].name%></p>
             <p><%-brdData[i].time%></p>
+            <div class="btns">
+                <div class="upt">수정</div>
+                <a class="del" href="/brdlist/delete/<%-brdData[i].num%>">삭제</a>
+            </div>
         </div>
+        <form class="brdupt" action="/upt/brdlist" method="post">
+            <input type="hidden" name="id" value="<%-brdData[i].num%>">
+            <input type="text" name="name" value="<%-brdData[i].name%>" placeholder="제목">
+            <select name="newsoption">
+                <option value="서비스">서비스</option>
+                <option value="작업">작업</option>
+                <option value="업데이트">업데이트</option>
+            </select>
+            <textarea name="context" placeholder="설명"><%-brdData[i].conext%></textarea>
+            <button type="submit">공지사항수정</button>
+            <button class="cancel" type="button">취소</button>
+        </form>
         <% } %>
     </div>
+    <h2 class="adminmaintitle">공지사항 등록</h2>
     <!-- 공지사항을 등록하는 form태그 구간 -->
-    <form action="/add/brdlist" method="post">
+    <form class="adminbrdForm" action="/add/brdlist" method="post">
         <input type="text" name="name" placeholder="제목">
         <select name="newsoption">
             <option value="서비스">서비스</option>
@@ -36,5 +55,27 @@
         <textarea name="context" placeholder="설명"></textarea>
         <button type="submit">공지사항등록</button>
     </form>
+    <script>
+        const uptBtns = document.querySelectorAll(".upt");
+        const delBtns = document.querySelectorAll(".del");
+        const uptForms = document.querySelectorAll(".brdupt");
+        const cancelBtns = document.querySelectorAll(".cancel");
+        uptBtns.forEach(function(item,index){
+            item.addEventListener("click",function(){
+                uptForms[index].style.display = "flex";
+            });
+
+            cancelBtns[index].addEventListener("click",function(){
+                uptForms[index].style.display = "none";
+            });
+
+            delBtns[index].addEventListener("click",function(e){
+                let a = window.confirm("진짜로 삭제 하시겠습니까?");
+                if(!a){
+                    e.preventDefault();
+                }
+            });
+        }); 
+    </script>
 </body>
 </html>
